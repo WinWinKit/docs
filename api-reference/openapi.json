@@ -1,94 +1,39 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.1.0",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "WinWinKit API",
+    "description": "An API for interacting with WinWinKit.",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://api.winwinkit.com",
+      "description": "The production server."
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/referral/users": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "operationId": "createReferralUser",
+        "summary": "Create a new referral user",
+        "description": "Creates a new referral user in the database.",
         "requestBody": {
-          "description": "Plant to add to the store",
+          "description": "The referral user to create.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "$ref": "#/components/schemas/ReferralUserCreate"
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
-          "200": {
-            "description": "plant response",
+          "201": {
+            "description": "The referral user was created successfully.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ReferralUser"
                 }
               }
             }
@@ -96,32 +41,18 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
+    "/referral/users/{id}": {
+      "get": {
+        "operationId": "getReferralUser",
+        "summary": "Get the referral user by id",
+        "description": "Returns the referral user by id.",
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "The referral user.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/ReferralUser"
                 }
               }
             }
@@ -132,63 +63,187 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "ReferralUserCreate": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
+          "app_user_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Unique identifier the user in your app.",
+            "example": "8dfae4b5-1a2d-4c1e-9152-5297086a161c"
           },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
+          "is_premium": {
+            "type": [
+              "boolean",
+              "null"
             ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+            "description": "Is the user premium.",
+            "example": true
+          },
+          "first_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date when the user was first seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "last_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date when the user was last seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "array",
+              "null"
+            ],
+            "description": "Metadata object.",
+            "example": "{\"key\": \"value\"}"
           }
-        ]
-      },
-      "Error": {
+        },
         "required": [
-          "error",
-          "message"
+          "app_user_id"
         ],
+        "description": "Create a new referral user."
+      },
+      "ReferralUserUpdate": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "is_premium": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Is the user premium.",
+            "example": true
           },
-          "message": {
-            "type": "string"
+          "first_seen_at": {
+            "type": "string",
+            "description": "Date when the user was first seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "description": "Date when the user was last seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "array",
+              "null"
+            ],
+            "description": "Metadata object.",
+            "example": "{\"key\": \"value\"}"
           }
-        }
-      }
-    },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+        },
+        "description": "Update a referral user with new properties."
+      },
+      "RegisterReferralUserPushToken": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Device identifier where the push token was received.",
+            "example": "0dfae4b5-1a2d-4c1e-9152-5297086a161c"
+          },
+          "token": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Push token value.",
+            "example": "0dfae4b5-1a2d-4c1e-9152-5297086a161c"
+          },
+          "token_type": {
+            "type": "string",
+            "description": "Push token type. Must be 'apns' or 'fcm'.",
+            "example": "apns"
+          }
+        },
+        "required": [
+          "device_id",
+          "token",
+          "token_type"
+        ],
+        "description": "Register a new push token for a referral user."
+      },
+      "UnregisterReferralUserPushToken": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string",
+            "maxLength": 128,
+            "description": "Device identifier where the push token was received.",
+            "example": "0dfae4b5-1a2d-4c1e-9152-5297086a161c"
+          }
+        },
+        "required": [
+          "device_id"
+        ],
+        "description": "Unregister push token for a referral user."
+      },
+      "ReferralUser": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ReferralUserId"
+          },
+          "app_user_id": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Unique identifier the user in your app.",
+            "example": "8dfae4b5-1a2d-4c1e-9152-5297086a161c"
+          },
+          "is_premium": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "Is the user premium.",
+            "example": true
+          },
+          "first_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date when the user was first seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "last_seen_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Date when the user was last seen at.",
+            "example": "2020-11-20T08:47:11.782+00:00"
+          },
+          "metadata": {
+            "type": [
+              "object",
+              "array",
+              "null"
+            ],
+            "description": "Metadata object.",
+            "example": "{\"key\": \"value\"}"
+          }
+        },
+        "required": [
+          "id",
+          "app_user_id"
+        ],
+        "description": "Create a new referral user."
+      },
+      "ReferralUserId": {
+        "type": "string",
+        "minLength": 1,
+        "description": "The unique identifier of the referral user.",
+        "example": ""
       }
     }
   }
