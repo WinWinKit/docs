@@ -20,7 +20,7 @@
     {
       "name": "API Reference",
       "url": "api-reference",
-      "openapi": "/api-reference/openapi.json"
+      "openapi": "https://api.winwinkit.com/openapi"
     }
   ],
   "anchors": [],
