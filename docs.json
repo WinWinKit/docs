@@ -1,0 +1,82 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Starter Kit",
+  "colors": {
+    "primary": "#5C7C2F",
+    "light": "#D4FF70",
+    "dark": "#5C7C2F"
+  },
+  "background": {
+    "color": {
+      "light": "#FCFCFD",
+      "dark": "#111113"
+    }
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Essentials",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/settings",
+              "essentials/navigation",
+              "essentials/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "openapi": {
+          "source": "https://api.winwinkit.com/openapi",
+          "directory": "api-reference"
+        },
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "api": {
+    "playground": {
+      "display": "interactive"
+    },
+    "examples": {
+      "languages": ["curl", "javascript"]
+    }
+  },
+  "navbar": {
+    "links": []
+  },
+  "footer": {
+    "socials": {
+      "website": "https://winwinkit.com",
+      "github": "https://github.com/winwinkit",
+      "linkedin": "https://linkedin.com/company/winwinkit"
+    }
+  }
+}
