@@ -28,6 +28,14 @@
             ]
           },
           {
+            "group": "Integrations",
+            "pages": [
+              "integrations/api-keys",
+              "integrations/swift-sdk",
+              "integrations/typescript-sdk"
+            ]
+          },
+          {
             "group": "Essentials",
             "pages": [
               "essentials/markdown",
