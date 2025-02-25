@@ -75,7 +75,20 @@
     }
   },
   "navbar": {
-    "links": []
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:oleh@winwinkit.com"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/winwinkit"
+      },
+      {
+        "label": "Get Started",
+        "href": "https://winwinkit.com"
+      }
+    ]
   },
   "footer": {
     "socials": {
