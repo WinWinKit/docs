@@ -3,9 +3,9 @@
   "theme": "mint",
   "name": "WinWinKit",
   "colors": {
-    "primary": "#5C7C2F",
+    "primary": "#8DB654",
     "light": "#D4FF70",
-    "dark": "#5C7C2F"
+    "dark": "#8DB654"
   },
   "background": {
     "color": {
