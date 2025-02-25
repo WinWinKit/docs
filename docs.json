@@ -28,6 +28,15 @@
             ]
           },
           {
+            "group": "Referral",
+            "pages": [
+              "referral/introduction",
+              "referral/programs",
+              "referral/rewards",
+              "referral/users"
+            ]
+          },
+          {
             "group": "Integrations",
             "pages": [
               "integrations/api-keys",
