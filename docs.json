@@ -47,7 +47,7 @@
       {
         "tab": "API Reference",
         "openapi": {
-          "source": "https://api.winwinkit.com/openapi",
+          "source": "api-reference/openapi.json",
           "directory": "api-reference"
         },
         "groups": [
