@@ -1,0 +1,16 @@
+---
+title: 'Authentication'
+description: 'Learn how to authenticate your requests to the WinWinKit API.'
+---
+
+To authenticate you need to add an `x-api-key` header with the contents of the header being your API Key. 
+
+To generate an API Key, go to WinWinKit -> Settings -> Integrations -> New API Key page.
+
+```json
+{
+    "headers": {
+      "x-api-key": "wwk_abcd1234efgh5678"
+    }
+}
+```
