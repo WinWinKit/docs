@@ -6,15 +6,16 @@ description: 'Learn how the WinWinKit API returns errors and handle them in your
 ## Overview
 
 When you send a request to the WinWinKit API, you receive a response that includes an HTTP status code and, in most cases, a response body. 
-To determine your request’s status and handle errors, use the HTTP status code along with the code from the ErrorResponse. 
+To determine your request’s status and handle errors, use the HTTP status code along with the code from the Error Response. 
 Interpret the error starting with the most general information first.
 
-## Response codes
+## Response Codes
 
-WinWinKit uses standard HTTP codes to indicate the success or failure of your requests. In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related failures, and 5xx codes are for infrastructure issues.
+WinWinKit uses standard HTTP codes to indicate the success or failure of your requests. 
+In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related failures, and 5xx codes are for infrastructure issues.
 
 | Status | Name | Description |
-|------------|------|-------------|
+|:-----------|:-----|:------------|
 | 200 | OK | Success. |
 | 201 | Created | Object created. |
 | 400 | Bad Request | Check that the request format was correct. |
@@ -23,3 +24,39 @@ WinWinKit uses standard HTTP codes to indicate the success or failure of your re
 | 422 | Unprocessable Entity | Check that the request data was correct. |
 | 429 | Too Many Requests | The rate limit was exceeded. |
 | 500 | Internal Server Error | Indicates an error with WinWinKit servers. |
+
+## Error Response
+
+The error details that an API returns in the response body whenever the API request isn’t successful. Contains an array of one or more errors.
+
+```json
+{
+  "errors": [
+    {
+      "code": "<string>",
+      "status": <number>,
+      "title": "<string>",
+      "source": "<string | null>"
+    }
+  ]
+}
+```
+
+## Parse the Error Code
+
+The code property is a stable, machine-readable value indicating the exact type of error. 
+The code is hierarchical, with dots separating the information about the error from general to specific. 
+The more information the system has about the error, the more levels the error code includes. 
+
+| Status | Code | Description |
+|:-------|:-----|:------------|
+| 400 | BAD_REQUEST | The request is not valid. |
+| 400 | BODY_INVALID | The request body is the wrong type and is not valid JSON. |
+| 401 | UNAUTHORIZED | The rate limit was exceeded. |
+| 403 | FORBIDDEN | The method and path combination is valid, but not allowed due to access restrictions. |
+| 404 | NOT_FOUND | The resource does not exist. |
+| 404 | PATH_ERROR | The path is not valid. For example, GET `https://api.winwinkit.com/lol` is not a valid path in this API. |
+| 405 | METHOD_NOT_ALLOWED | The method and path combination is not valid in the API. |
+| 422 | PARAMETER_ERROR.INVALID | The parameter is allowed but has an invalid value or type. |
+| 422 | PARAMETER_ERROR.REQUIRED | A required parameter is missing. |
+| 500 | INTERNAL_SERVER_ERROR | Indicates an error with WinWinKit servers. |
