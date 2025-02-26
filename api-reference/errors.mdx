@@ -1,0 +1,25 @@
+---
+title: 'Handling Errors'
+description: 'Learn how the WinWinKit API returns errors and handle them in your code.'
+---
+
+## Overview
+
+When you send a request to the WinWinKit API, you receive a response that includes an HTTP status code and, in most cases, a response body. 
+To determine your request’s status and handle errors, use the HTTP status code along with the code from the ErrorResponse. 
+Interpret the error starting with the most general information first.
+
+## Response codes
+
+WinWinKit uses standard HTTP codes to indicate the success or failure of your requests. In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related failures, and 5xx codes are for infrastructure issues.
+
+| Status | Name | Description |
+|------------|------|-------------|
+| 200 | OK | Success. |
+| 201 | Created | Object created. |
+| 400 | Bad Request | Check that the request format was correct. |
+| 401 | Unauthorized | The API key used was missing or invalid. |
+| 404 | Not Found | The resource was not found. |
+| 422 | Unprocessable Entity | Check that the request data was correct. |
+| 429 | Too Many Requests | The rate limit was exceeded. |
+| 500 | Internal Server Error | Indicates an error with WinWinKit servers. |
