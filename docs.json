@@ -22,16 +22,15 @@
           {
             "group": "Get Started",
             "pages": [
-              "introduction",
-              "quickstart"
+              "introduction"
             ]
           },
           {
             "group": "Referral",
             "pages": [
-              "referral/introduction",
-              "referral/programs",
+              "referral/getstarted",
               "referral/rewards",
+              "referral/programs",
               "referral/users"
             ]
           },
