@@ -60,6 +60,17 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Support",
+        "groups": [
+          {
+            "group": "Support",
+            "pages": [
+              "support/contact-us"
+            ]
+          }
+        ]
       }
     ]
   },
