@@ -1,5 +1,33 @@
 ---
 title: 'TypeScript SDK'
 description: 'SDK for JavaScript runtimes (Node.js and browsers).'
-icon: 'js'
 ---
+
+### Quickstart
+
+```bash
+pnpm add winwinkit
+```
+
+```TypeScript
+import { WinWinKit } from 'winwinkit'
+
+const wwk = new WinWinKit({
+  apiKey: process.env['WINWINKIT_API_KEY'] ?? '',
+})
+
+// Create referral user.
+const referralUser = await wwk.createReferralUser({
+  appUserId: "abcd-efgh-1234-5678"
+})
+
+...
+
+// Claim referral code.
+const { referralUser, grantedRewards } = await wwk.claimReferralCode({ 
+  appUserId: "abcd-efgh-1234-5678",
+  code: "XYZ123"
+})
+```
+
+[Read more](https://github.com/WinWinKit/winwinkit-js)
