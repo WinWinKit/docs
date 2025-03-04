@@ -13,3 +13,7 @@ Run the following command at the root of your documentation (where docs.json is)
 ```
 mintlify dev
 ```
+
+```
+curl https://api.winwinkit.com/openapi -o ./api-reference/openapi.json 
+```
