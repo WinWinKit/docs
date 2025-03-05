@@ -22,15 +22,15 @@
           {
             "group": "General",
             "pages": [
-              "introduction"
+              "introduction",
+              "quickstart"
             ]
           },
           {
             "group": "Referral",
             "pages": [
-              "referral/getstarted",
-              "referral/rewards",
               "referral/programs",
+              "referral/rewards",
               "referral/users"
             ]
           },
@@ -84,10 +84,6 @@
   },
   "navbar": {
     "links": [
-      {
-        "label": "Support",
-        "href": "mailto:oleh@winwinkit.com"
-      },
       {
         "label": "GitHub",
         "href": "https://github.com/winwinkit"
