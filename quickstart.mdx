@@ -1,0 +1,106 @@
+---
+title: 'Quickstart'
+description: 'Set up and launch a referral program.'
+---
+
+To get started with WinWinKit follow these steps:
+
+## 1. Create an Account
+
+Sign in into WinWinKit at [app.winwinkit.com](https://app.winwinkit.com) by entering your email address.
+If you don't yet have an account, it will be created automatically. Then enter the pin code sent to your email address and you will be in!
+
+![Sign in](/images/signin.png)
+
+## 2. Create a Project
+
+Once registered, you'll be asked to create a project. 
+Project is your workspace for managing referral programs.
+
+![Create project](/images/create-project.png)
+
+## 3. Create a Reward
+
+Congrats, now you are ready to create rewards, which is an essential part of any referral program. 
+A reward represent a level of access, feature, or content that a user is "rewarded" with.
+
+To create a reward click "Rewards" tab on the sidebar, then click "+ New Reward" button.
+
+Fill in the information about the new reward, such as name and optionally description. 
+
+The key field is auto-complete based on the entered name, and can be modified if needed.
+
+The key is a stable and machine-readable string value meant to be used for granting users access to their rewards. Once the reward is saved, its key cannot be changed. 
+
+![Create reward](/images/create-reward.png)
+
+Create other rewards relevant for your product, or continue to the next step. 
+
+[Read more about Rewards](/referral/rewards)
+
+## 4. Create a Program
+
+Finally we have everything needed to create the first referral program! 🎉
+
+Click "Programs" tab on the sidebar, then click "+ New Program" button.
+
+Enter the name and optionally description.
+
+Then select rewards for the referring and invited users. Each side can be configured with different rewards. 
+
+![Create program](/images/create-program.png)
+
+[Read more about Programs](/referral/programs)
+
+## 5. Activate the Program
+
+Once the program is saved, it is ready to be activated.
+
+An active program means that any app users created through an integration will be assigned to that program.
+Once a user is assigned to the program, they receive a unique referral code that can be shared with and claimed by other users of your app.
+
+![Activate program](/images/activate-program.png)
+
+<Check>
+Your referral program is ready!
+</Check>
+
+<Info>
+Currently WinWinKit supports only one active program at a time. 
+We're working towards allowing multiple active programs with split distribution and targeting.
+</Info>
+
+## 6. Integrate
+
+Now that your program is set up, it's time to integrate WinWinKit into your application. 
+We provide multiple integration options to suit your needs, including native SDKs and a REST API. 
+Choose the integration method that best fits your tech stack and development workflow.
+
+### SDKs
+
+We provide native Swift SDK for iOS & macOS and TypeScript SDK for React & ReactNative:
+
+<CardGroup>
+  <Card title="Swift SDK" icon="swift" href="/integrations/swift-sdk">
+    Integrate WinWinKit into your iOS & macOS application.
+  </Card>
+  <Card title="TypeScript SDK" icon="js" href="/integrations/typescript-sdk">
+    Integrate WinWinKit into your React & React Native application.
+  </Card>
+</CardGroup>
+
+<Warning>
+The SDK provide interface for interacting with WinWinKit APIs, but not the UI.
+
+Thus you need to build the user interface for the referral feature in your app.
+
+We plan to provide UI with the SDK in the future. Please let us know if that is your requirement to get started.
+</Warning>
+
+### REST API
+
+If you prefer direct API integration, you can use our REST API:
+
+<Card title="API Reference" icon="code" href="/api-reference/introduction">
+  Explore our API documentation.
+</Card>
