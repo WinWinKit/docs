@@ -2,3 +2,92 @@
 title: 'Programs'
 description: 'Understand what are, and how to use the programs.'
 ---
+
+A referral program defines the rewards that users receive for inviting others and being invited.
+
+## Example Program
+
+Let's create a program that rewards users for inviting others. 
+As an example, we'll set up a program where:
+
+- Referring user gets a new app icon for each person they invite, with three icons to be rewarded in total.
+- Every invited user receives a free month.
+
+<Info>
+Following example assumes there are appropriate rewards configured. Learn more about [Rewards](/referral/rewards).
+</Info>
+
+This creates a win-win situation where both parties benefit from the referral.
+
+**Step-by-step guide**
+
+#### 1. Name and description
+
+Enter a name and optional description.
+
+![Create program](/images/create-program-1.png)
+
+<Info>
+Name and description are meant for internal purpose and are not used in the [Preview Link](/referral/preview-link).  
+</Info>
+
+#### 2. Rewards for the referring user 
+
+Since we have three app icons to reward the referring user, we need to add three separate rewards.
+
+**2.1.** Click "+ Add Reward" in the "Referring user" section. 
+   
+The dropdown will show all available rewards.
+   
+![Create program](/images/create-program-2.png)
+
+**2.2** Select the first reward for the referring user. Let it be "App Icon Candy".
+
+![Create program](/images/create-program-3.png)
+
+The reward is now selected and has the default configurations:
+
+Activation "Claim", the reward is activated when one invited user claims the referring user's referral code.
+
+Deactivation "Never", the referring user keeps the reward forever.
+
+**2.3** Select the second reward "App Icon Hologram".
+
+Since we want the second icon to be rewarded for the second invited user, we need to change Activation on Claim number to 2.
+
+![Create program](/images/create-program-4.png)
+
+**2.4** Select the last reward "App Icon Neon".
+
+Similar to the previous step, we want the third icon to be rewarded for the third invited user, so we need to change Activation on Claim number to 3.
+
+![Create program](/images/create-program-5.png)
+
+Now the rewards for the referring user are ready.
+
+#### 3. Rewards for the invited user
+
+**3.1.** Again, click "+ Add Reward", but now for the "Invited user" section.
+
+![Create program](/images/create-program-6.png)
+
+**3.2.** Select the reward "Free Month".
+
+The reward is now selected and has the default configurations:
+
+![Create program](/images/create-program-7.png)
+
+Note there is no number selection for Activation - invited users have no further relations.
+
+Now we should change the Deactivation to "Interval" with "1 Months" duration. 
+This will ensure that the invited user won't keep the reward after 1 month from when the reward was activation.
+
+![Create program](/images/create-program-8.png)
+
+Below is screenshot of how all rewards set up: 
+   
+![Create program](/images/create-program-9.png)
+
+#### 4. Save
+
+The new referral program is now set up!
