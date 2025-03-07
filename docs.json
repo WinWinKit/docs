@@ -31,7 +31,8 @@
             "pages": [
               "referral/programs",
               "referral/rewards",
-              "referral/users"
+              "referral/users",
+              "referral/preview-link"
             ]
           },
           {
