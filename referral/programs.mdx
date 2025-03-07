@@ -81,6 +81,41 @@ If you require a different limit than what is currently offered, [please contact
 This allows you to provide extra configuration and metadata making it flexible to meet your specific needs. 
 Must be a valid JSON object.
 
+## Activation
+
+An active program means that any app users created through an integration will be assigned to that program. 
+Once a user is assigned to the program, they receive a unique referral code that can be shared with and claimed by other users of your app.
+
+By default every new program is Inactive.
+
+#### How to Activate
+
+Click the three-dots icon on the right side of a row and click "Activate":
+
+![Activate Program](/images/activate-program.png)
+
+<Warning>
+Currently WinWinKit supports **only one active program at a time**. 
+We're working towards allowing multiple active programs with split distribution and targeting.
+</Warning>
+
+## Re-assignment
+
+Currently it is not possible to explicitly re-assign a user to a different program.
+
+If a program is deleted, then users who have been assigned to that program will be assigned to the active program. 
+If there is no active program, users won't have any program. 
+It is also technically possible to have users with referral code but not a program.
+
+<Info>
+Referral code can be assigned to a user only once.
+While it is technically possible for the user to be assigned to different programs, their referral code won't change.
+</Info>
+
+<Warning>
+Activate and delete programs with caution to prevent unexpected issues. In production, it is good practice to always have an active program.
+</Warning>
+
 ## Example Program
 
 Let's create a program that rewards users for inviting others. 
