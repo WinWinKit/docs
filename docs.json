@@ -68,6 +68,7 @@
           {
             "group": "Support",
             "pages": [
+              "support/glossary",
               "support/contact-us"
             ]
           }
