@@ -23,7 +23,8 @@
             "group": "General",
             "pages": [
               "introduction",
-              "quickstart"
+              "quickstart",
+              "glossary"
             ]
           },
           {
@@ -68,7 +69,6 @@
           {
             "group": "Support",
             "pages": [
-              "support/glossary",
               "support/contact-us"
             ]
           }
