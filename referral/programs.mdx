@@ -3,7 +3,83 @@ title: 'Programs'
 description: 'Understand what are, and how to use the programs.'
 ---
 
-A referral program defines the rewards that users receive for inviting others and being invited.
+A program defines the rewards that users receive for inviting others and being invited.
+
+## Setting Up
+
+### General
+
+Name and optional description that are meant for internal use.
+
+### Rewards
+
+Rewards are essential part of any referral program and represent a level of access, feature, or content that a user is "rewarded" with.
+Learn more about [Rewards](/referral/rewards).
+
+#### Referring vs Invited users
+
+Referring users are those who invite others to your app. They initiate the referral by sharing their unique referral code.
+
+Invited users are new users to your app who are referred by the referring users. 
+
+This dual-reward system creates a mutually beneficial environment, encouraging both parties to participate actively in the referral.
+
+#### Activation
+
+Each reward for either referring or invited users has its own configuration for when it should be activated, which determines when the party should be rewarded.
+
+**Claim**
+
+For **the referring user**, activate the reward when invited user(s) claim the referral code.
+The number defines how many invited users should claim the referral code for the reward to be activated.
+For example, the default value "1" means that the reward to be activated when the first invited user claims the referral code.
+
+For **the invited users**, activate the reward once the referral code is claimed.
+Note there is no number selection for Activation - invited users have no further relations.
+
+**Conversion**
+
+For **the referrling user**, activate the reward when invited user(s) claim the referral code and then become premium.
+The number defines how many invited users should claim and convert for the reward to be activated.
+For example, the default value "1" means that the reward to be activated when the first invited user converts to premium.
+
+For **the invited users**, activate the reward when converted to premium.
+Note there is no number selection for Activation - invited users have no further relations.
+
+<Warning>
+Using **Conversion** activation requires continious updates of `is_premium` property for users. Read more about [Users](/referral/users).
+</Warning>
+
+#### Deactivation
+
+Each reward has deactivation configurations.
+
+**Never**
+
+Once the reward is activated, the user will retain it indefinitely.
+
+**Interval**
+
+Once the reward is activated, the user retains it for a specified duration.
+
+<Info>
+Check out how "Free Month" reward is configured in the [Example Program](/referral/programs#3-rewards-for-the-invited-user) below.
+</Info>
+
+### Configs
+
+#### Limit
+
+In some cases, it may be beneficial to restrict the number of invited users who can utilize the same referral code.
+
+The default setting is Unlimited, but this can be adjusted to any number up to 100.
+
+If you require a different limit than what is currently offered, [please contact us](/support/contact-us).
+
+#### Metadata
+
+This allows you to provide extra configuration and metadata making it flexible to meet your specific needs. 
+Must be a valid JSON object.
 
 ## Example Program
 
@@ -26,10 +102,6 @@ This creates a win-win situation where both parties benefit from the referral.
 Enter a name and optional description.
 
 ![Create program](/images/create-program-1.png)
-
-<Info>
-Name and description are meant for internal purpose and are not used in the [Preview Link](/referral/preview-link).  
-</Info>
 
 #### 2. Rewards for the referring user 
 
@@ -76,8 +148,6 @@ Now the rewards for the referring user are ready.
 The reward is now selected and has the default configurations:
 
 ![Create program](/images/create-program-7.png)
-
-Note there is no number selection for Activation - invited users have no further relations.
 
 Now we should change the Deactivation to "Interval" with "1 Months" duration. 
 This will ensure that the invited user won't keep the reward after 1 month from when the reward was activation.
