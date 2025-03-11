@@ -1,6 +1,60 @@
 ---
 title: 'Preview Link'
-description: 'A web url to the referral code and its rewards which your app users can share with friends.'
+description: 'A web url to the referral code and its rewards which your app users can share to invite new users.'
 ---
 
 ![Usage](/images/preview-link-usage.png)
+
+An example of the Preview Link page for the [Usage](https://usage.pro) app.
+
+## Setting Up
+
+To enabled Preview Links, go to the "Settings" tab on the sidebar.
+
+### General
+
+#### Logo
+
+Upload app icon.
+
+#### Name
+
+Name of the app.
+
+#### Description
+
+Short description of the app. 
+
+#### Link
+
+Set the link to where your app is available. This can be a link to the App Store or website.
+
+#### Subdomain
+
+Set the subdomain that will be used in the URL for the Preview Links. This can only be saved once.
+
+![General](/images/preview-link-1.png)
+
+### Preview Link
+
+This section displays the status and a preview of the Preview Link page for your app.
+
+![Preview Link](/images/preview-link-2.png)
+
+## Access via User Property
+The Preview Link value is available on the user object as the `preview_link` property.
+
+```json
+{
+  "data": {
+    "referral_user": {
+      "app_user_id": "821fae4b5-1a2d-4c1e-9152-5297086a161c",
+      "code": "XYZ123",
+      "preview_link": "https://example.wwk.link/XYZ123",
+      ...
+    }
+  }
+}
+```
+
+Learn more about [Users](/referral/users). 
