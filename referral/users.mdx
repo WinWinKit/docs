@@ -2,3 +2,327 @@
 title: 'Users'
 description: 'A user represents an individual who interacts with your app.'
 ---
+
+To integrate referral program, you must register users of your app in WinWinKit. Learn more about supported [integrations](/quickstart/#6-integrate).
+
+## User Properties
+
+### Configurable
+
+These are the properties that you can use to update your user entities in WinWinKit.
+
+#### App User Id (Required)
+
+The only mandatory property that uniquely identifies a user within your app and in WinWinKit. 
+
+Normally it is a universally unique identifier (UUID).
+
+#### Is Premium
+
+Flag determining premium status of a user. 
+
+Used with the [Activation on Conversion](/referral/programs#activation) configuration and for tracking referring user's [Stats](/referral/users#stats). 
+
+We recommend updating it whenever user's premium status changes. 
+
+#### First Seen At
+
+Date when the user was first seen in your app. 
+
+Used to determine user's eligibility to claim a referral code. Learn more about [Claim Code Elibigility](/referral/users#claim-code-eligibility) 
+
+#### Last Seen At
+
+Date when the user was last seen in your app.
+
+Tracked automatically if integrated via [Swift SDK](/integrations/swift-sdk).
+
+#### Metadata
+
+A metadata object.
+
+This allows you to provide extra configuration and metadata making it flexible to meet your specific needs. 
+Must be a valid JSON object.
+
+### Provided by WinWinKit
+
+These are the properties provided by WinWinKit that reflect user's referral data, active and expired rewards, and stats.
+
+#### Code
+
+Unique referral code for the user.
+
+A referral code is always 6 characters long and consists of a combination of letters and numbers.
+
+<Info>
+The code is unique within your app. 
+</Info>
+
+<Info>
+Is assigned once and never changes.
+</Info>
+
+Example: **XYZ123**
+
+#### Preview Link
+
+A web url to the referral code and its rewards which your app users can share with friends.
+
+Learn more about how to set up [Preview Link](/referral/preview-link).
+
+**Example**: `https://appname.wwk.link/XYZ123`
+
+#### Program
+
+An object containing complete information about the program assigned to the user.
+
+#### Claim Code Eligibility
+
+An object providing information about user's eligibility to claim a referral code.
+
+<Info>
+**An eligible user is allowed to claim a referral code.**
+</Info>
+
+**Eligibility Rules**
+
+Currently, WinWinKit implements a few simple rules for limiting the types of users eligible to claim a referral code.
+
+- A user must not be older than 7 days.
+
+    Because referral is for inviting new users, this restricts users from getting rewards without referring new users.
+    
+    The reference date used is the [First Seen At](/referral/users#first-seen-at), if provided; otherwise, the date when the user was created in WinWinKit is used.
+
+    <Info>
+    Does this rule seem reasonable? If not, we would love to hear your feedback.
+    </Info>
+
+- The program limit has not been reached.
+
+    The reference program here is referring user's program.
+    Read more about Programs [Limit](/referral/programs/) configuration. 
+
+    <Info>
+    By default there is no limit, and it must be specified for this rule to apply.
+    </Info>
+
+- A user can claim a code only once.
+
+- A user cannot claim own code.
+
+<Info>
+You can impose further limitations on a user's ability to claim a referral code, but cannot prolong elibility conditions imposed by WinWinKit. 
+Once a user is not eligible according to WinWinKit, there is no override. 
+</Info>
+
+<Info>
+If a user attempts to claim a referral code when not eligible, WinWinKit provides a descriptive message explaining the reason for the decline. 
+</Info>
+
+**Example**
+
+The `eligible` field indicates whether the user can claim the referral code, while `eligible_until` specifies the expiration date.
+
+```json
+"claim_code_eligibility": {
+  "eligible": true,
+  "eligible_until": "2025-02-10T10:28:18.104Z"
+}
+```
+
+#### Rewards
+
+A list of active and expired rewards for the user.
+
+<Warning>
+Remember to unlock access to the active rewards in your app.
+</Warning>
+
+#### Stats
+
+An object with information about referral statistics for the user.
+
+Provides three values:
+
+- Claims - how many invited users claimed the user's referral code.
+- Conversions - how many of those who claimed the user's referral code became premium users. 
+- Churns - how many of those who claimed the user's referral code became premium users and then churned.
+
+<Info>
+Correct tracking of Conversions and Churns requires updating [Premium](/referral/users#is-premium) flag for the users.
+</Info>
+
+**Example**
+
+```json
+"stats": {
+  "claims": 10,
+  "conversions": 8,
+  "churns": 1
+}
+```
+
+## Example
+
+Below is an example of a full referral user object returned by the [API](/api-reference/introduction).
+
+```json
+{
+  "data": {
+    "referral_user": {
+      "app_user_id": "821fae4b5-1a2d-4c1e-9152-5297086a161c",
+      "code": "XYZ123",
+      "preview_link": "https://example.wwk.link/XYZ123",
+      "is_premium": true,
+      "first_seen_at": "2024-11-10T10:28:18.104Z",
+      "last_seen_at": "2025-02-10T10:28:18.104Z",
+      "metadata": {
+        "key": "value"
+      },
+      "program": {
+        "id": "77dc-5508-40d3-8723-472e884b55fe",
+        "name": "Free month",
+        "description": "Free month for each invited user.",
+        "distribution_percentage": 100,
+        "limit": 100,
+        "metadata": {
+          "key": "value"
+        },
+        "rewards": {
+          "sender": {
+            "basic": {
+              "key": "extended-premium-trial",
+              "name": "Extended Premium Trial",
+              "description": "Extend Premium trial for 14 more days.",
+              "metadata": {
+                "key": "value"
+              },
+              "activationConfiguration": {
+                "variant": "claim",
+                "amount": 1
+              },
+              "deactivationConfiguration": {
+                "variant": "never"
+              }
+            },
+            "credit": {
+              "key": "credits-level-one",
+              "credits": 100,
+              "name": "Level one",
+              "description": "Grant credits for completing 100 levels.",
+              "metadata": {
+                "key": "value"
+              },
+              "limit": 0,
+              "activationConfiguration": {
+                "variant": "claim",
+                "amount": 1
+              },
+              "deactivationConfiguration": {
+                "variant": "never"
+              }
+            }
+          },
+          "receiver": {
+            "basic": {
+              "key": "extended-premium-trial",
+              "name": "Extended Premium Trial",
+              "description": "Extend Premium trial for 14 more days.",
+              "metadata": {
+                "key": "value"
+              },
+              "activationConfiguration": {
+                "variant": "claim"
+              },
+              "deactivationConfiguration": {
+                "variant": "never"
+              }
+            },
+            "credit": {
+              "key": "credits-level-one",
+              "credits": 100,
+              "name": "Level one",
+              "description": "Grant credits for completing 100 levels.",
+              "metadata": {
+                "key": "value"
+              },
+              "activationConfiguration": {
+                "variant": "claim"
+              },
+              "deactivationConfiguration": {
+                "variant": "never"
+              }
+            }
+          }
+        }
+      },
+      "claim_code_eligibility": {
+        "eligible": true,
+        "eligible_until": "2025-02-10T10:28:18.104Z"
+      },
+      "rewards": {
+        "active": {
+          "basic": [
+            {
+              "key": "extended-premium-trial",
+              "name": "Extended Premium Trial",
+              "description": "Extend Premium trial for 14 more days.",
+              "metadata": {
+                "key": "value"
+              },
+              "expires_at": null,
+              "created_at": "2025-02-10T10:28:18.104Z"
+            }
+          ],
+          "credit": [
+            {
+              "key": "credits-level-one",
+              "credits": 100,
+              "name": "Level one",
+              "description": "Grant credits for completing 100 levels.",
+              "metadata": {
+                "key": "value"
+              },
+              "expires_at": null,
+              "created_at": "2025-02-10T10:28:18.104Z"
+            }
+          ]
+        },
+        "expired": {
+          "basic": [
+            {
+              "key": "extended-premium-trial",
+              "name": "Extended Premium Trial",
+              "description": "Extend Premium trial for 14 more days.",
+              "metadata": {
+                "key": "value"
+              },
+              "expired_at": "2025-02-10T10:28:18.104Z",
+              "created_at": "2024-11-10T10:28:18.104Z"
+            }
+          ],
+          "credit": [
+            {
+              "key": "credits-level-one",
+              "credits": 100,
+              "name": "Level one",
+              "description": "Grant credits for completing 100 levels.",
+              "metadata": {
+                "key": "value"
+              },
+              "expired_at": "2025-02-10T10:28:18.104Z",
+              "created_at": "2024-11-10T10:28:18.104Z"
+            }
+          ]
+        }
+      },
+      "stats": {
+        "claims": 10,
+        "conversions": 8,
+        "churns": 1
+      }
+    }
+  }
+}
+```
