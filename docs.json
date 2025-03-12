@@ -13,6 +13,10 @@
       "dark": "#111113"
     }
   },
+  "logo": {
+    "light": "/logo.dark.svg",
+    "dark": "/logo.light.svg"
+  },
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
