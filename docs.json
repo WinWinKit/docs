@@ -2,6 +2,10 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "WinWinKit",
+  "appearance": {
+    "default": "dark",
+    "strict": true
+  },
   "colors": {
     "primary": "#111113",
     "light": "#D4FF70",
