@@ -18,10 +18,11 @@
     }
   },
   "logo": {
-    "light": "/logo.dark.svg",
-    "dark": "/logo.light.svg"
+    "dark": "/logo.svg",
+    "light": "/logo.svg",
+    "href": "https://winwinkit.com"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.ico",
   "navigation": {
     "tabs": [
       {
