@@ -56,7 +56,16 @@ The more information the system has about the error, the more levels the error c
 | 403 | FORBIDDEN | The method and path combination is valid, but not allowed due to access restrictions. |
 | 404 | NOT_FOUND | The resource does not exist. |
 | 404 | PATH_ERROR | The path is not valid. For example, GET `https://api.winwinkit.com/lol` is not a valid path in this API. |
-| 405 | METHOD_NOT_ALLOWED | The method and path combination is not valid in the API. |
 | 422 | PARAMETER_ERROR.INVALID | The parameter is allowed but has an invalid value or type. |
 | 422 | PARAMETER_ERROR.REQUIRED | A required parameter is missing. |
+| 429 | TOO_MANY_REQUESTS | Too many requests. |
 | 500 | INTERNAL_SERVER_ERROR | Indicates an error with WinWinKit servers. |
+
+**App Store Connect API** related error codes.
+
+| Status | Code | Description |
+|:-------|:-----|:------------|
+| 401 | APP_STORE_CONNECT.UNAUTHORIZED | Unauthorized to perform the request or the auth key has been revoked. |
+| 404 | APP_STORE_CONNECT.NOT_FOUND | Resource not found. |
+| 500 | APP_STORE_CONNECT.OTHER | Other error has occured. |
+| 500 | APP_STORE_CONNECT.ERROR | Internal server error on the App Store Connect side. |
