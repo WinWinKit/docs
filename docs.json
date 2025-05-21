@@ -58,7 +58,7 @@
       {
         "tab": "API Reference",
         "openapi": {
-          "source": "api-reference/openapi.json",
+          "source": "api-reference/openapi.yaml",
           "directory": "api-reference"
         },
         "groups": [
