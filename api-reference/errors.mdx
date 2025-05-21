@@ -22,6 +22,7 @@ In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related
 | 401 | Unauthorized | The API key used was missing or invalid. |
 | 404 | Not Found | The resource was not found. |
 | 422 | Unprocessable Entity | Check that the request data was correct. |
+| 424 | Failed Dependency | Request to the external service (e.g. App Store Connect) has failed. |
 | 429 | Too Many Requests | The rate limit was exceeded. |
 | 500 | Internal Server Error | Indicates an error with WinWinKit servers. |
 
@@ -60,12 +61,3 @@ The more information the system has about the error, the more levels the error c
 | 422 | PARAMETER_ERROR.REQUIRED | A required parameter is missing. |
 | 429 | TOO_MANY_REQUESTS | Too many requests. |
 | 500 | INTERNAL_SERVER_ERROR | Indicates an error with WinWinKit servers. |
-
-**App Store Connect API** related error codes.
-
-| Status | Code | Description |
-|:-------|:-----|:------------|
-| 401 | APP_STORE_CONNECT.UNAUTHORIZED | Unauthorized to perform the request or the auth key has been revoked. |
-| 404 | APP_STORE_CONNECT.NOT_FOUND | Resource not found. |
-| 500 | APP_STORE_CONNECT.OTHER | Other error has occured. |
-| 500 | APP_STORE_CONNECT.ERROR | Internal server error on the App Store Connect side. |
