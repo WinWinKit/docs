@@ -39,8 +39,8 @@
           {
             "group": "Referral",
             "pages": [
-              "referral/programs",
               "referral/rewards",
+              "referral/programs",
               "referral/users",
               "referral/preview-link"
             ]
