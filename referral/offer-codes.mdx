@@ -1,0 +1,144 @@
+---
+title: 'Offer Codes'
+description: 'Reward users with a free or discounted subscription for a specific duration.'
+---
+
+## Configure Offer Codes
+
+**To be done in App Store Connect.**
+
+To start rewarding users with Offer Codes, you must first configure them in App Store Connect.
+
+To configure an Offer Code:
+
+1. Sign in to [App Store Connect](https://appstoreconnect.apple.com).
+
+2. Navigate to Your App -> Subscriptions.
+
+3. Choose the subscription group containing your subscription.
+
+4. Select the subscription from the list.
+
+5. In the Subscription Prices section, click the add button (+).
+
+![Subscription Prices](/images/offer-codes-app-store-connect-1.png)
+
+6. From the menu, click Create Offer Codes.
+
+7. Enter a reference name for the offer.
+
+You’ll use this reference name to manage the offer in App Store Connect and to select it in WinWinKit when linking it to a reward.
+
+8. Select the Customer Eligibility for your offer.
+
+- **New subscribers**: Customers who have never subscribed to any subscription product within the group.
+- **Existing subscribers**: Customers who are currently subscribed to a product within the group.
+- **Expired subscribers**: Customers who were previously subscribed to a product within the group, but whose subscription has expired.
+
+<Info>
+All options are supported and practically don't make much difference from WinWinKit's perspective.
+Note that WinWinKit does not store or provide any information about your user's current or past subscriptions.
+</Info>
+<Info>
+You might want to apply custom logic when displaying rewards for new, existing or expired subscribers. 
+</Info>
+
+![Create Offer Code](/images/offer-codes-app-store-connect-2.png)
+
+9. Configure Introductory Offers compatibility. 
+
+If your subscription has an introductory offer, determine whether people redeeming your codes should be eligible to redeem both a code and the introductory offer by choosing from the following options:
+
+- **Yes**: Eligible customers will redeem your app’s introductory offer first, then automatically renew to the offer they redeemed with the code.
+- **No**: Eligible customers will redeem the offer code first, then automatically renew to the standard subscription price without using the introductory offer. If they cancel and resubscribe at any point, they’re still eligible to redeem an introductory offer.
+
+<Info>
+All options are supported and practically don't make much difference from WinWinKit's perspective.
+</Info>
+
+10. Click Next.
+
+11. Select the countries or regions where you want to make your offer available, then click Next.
+
+<Warning>
+WinWinKit does not fetch or filter availability by countries or regions. 
+If your app is available globally, we recommend you select all.
+If you have custom requirements to availability you need to handle it on your side.
+</Warning>
+
+12. Select Type of Offer.
+
+- **Pay as you go**: If you select Pay as you go, customers pay a discounted price for each billing period for a selected duration.
+- **Pay up front**: If you select Pay up front, customers pay a one-time discounted price for a selected duration.
+- **Free**: If you select Free, customers access the subscription for free for a selected duration.
+
+  Learn more about [offer types](https://developer.apple.com/help/app-store-connect/reference/pricing-and-availability). 
+
+<Info>
+All options are supported and practically don't make much difference from WinWinKit's perspective.
+</Info>
+
+![Type of Offer](/images/offer-codes-app-store-connect-3.png)
+
+13. Choose the appropriate duration, and if applicable, the discounted price for a base country or region, then click Next.
+
+14. Make sure the details of your offer are correct and click Confirm.
+
+<Info>
+Once you create an offer, you won’t be able to edit it. If changes to customer eligibility are needed, create a new offer.
+</Info>
+
+For more information please refer to the App Store Connect documentation:
+- [Offer codes](https://developer.apple.com/app-store/subscriptions/#offer-codes)
+- [Set up offer codes](https://developer.apple.com/help/app-store-connect/manage-subscriptions/set-up-offer-codes/)
+
+## Enable Integration
+
+**To be done in WinWinKit.**
+
+A valid integration with App Store Connect is required to start and continue using Offer Codes.
+
+The integration enables fetching information about available Offer Codes 
+and generating One-Time Use Codes that can be assigned to your app users as rewards for engaging with referrals.
+
+To enable the App Store Connect integration:
+
+1. Sign in to your project in [WinWinKit](https://app.winwinkit.com).
+
+2. Click Settings tab on the sidebar.
+
+3. Click Integrations tab on the topbar.
+
+4. Click Connect button in the App Store Connect section.
+
+![No App Store Connect](/images/no-app-store-connect.png)
+
+5. Follow instructions described under the form and submit the Auth Key.
+
+![App Store Connect Submit the Auth Key](/images/app-store-connect-integrate-1.png)
+
+<Warning>
+Select correct **App Manager** Access Role for the Auth Key to avoid broken experience for your users.
+</Warning>
+
+6. Once the Auth Key is submitted, select an app to integrate Offer Codes for and press Submit. 
+
+![App Store Connect Select an App](/images/app-store-connect-integrate-2.png)
+
+7. App Store Connect integration is ready!
+
+![App Store Connect Ready](/images/app-store-connect-integrate-3.png)
+
+## Create Offer Code Reward
+
+**To be done in WinWinKit.**
+
+## Support Offer Codes
+
+**To be done in your app's source code.**
+
+Developer documentation:
+
+[Supporting subscription offer codes in your apprting](https://developer.apple.com/documentation/storekit/supporting-subscription-offer-codes-in-your-app)
+
+[Implementing offer codes in your app](https://developer.apple.com/documentation/storekit/implementing-offer-codes-in-your-app)

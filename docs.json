@@ -42,6 +42,7 @@
               "referral/rewards",
               "referral/programs",
               "referral/users",
+              "referral/offer-codes",
               "referral/preview-link"
             ]
           },
