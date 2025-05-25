@@ -41,8 +41,41 @@ This section displays the status and a preview of the Preview Link page for your
 
 ![Preview Link](/images/preview-link-2.png)
 
-## Access via User Property
+## Access
+
+### Swift SDK
+
+The Preview Link value is available on the User object as the `previewLink` property.
+
+Get it from the singleton instance:
+
+```swift
+let previewLink = Referrals.shared.user?.previewLink
+```
+
+Or in a SwiftUI view from the observable object:
+```swift 
+@State var referralsObservableObject = Referrals.shared.observableObject
+
+...
+
+Text(self.referralsObservableObject.user?.previewLink ?? "-")
+```
+
+Learn more about [Swift SDK](/integrations/swift-sdk).
+
+### TypeScript SDK
+
 The Preview Link value is available on the user object as the `preview_link` property.
+
+```typescript
+const user = await winwinkit.fetchUser({appUserId: "<app-user-id>"});
+const previewLink = user?.preview_link;
+```
+
+### REST API
+
+The Preview Link value is part of the User object:
 
 ```json
 {
@@ -56,5 +89,3 @@ The Preview Link value is available on the user object as the `preview_link` pro
   }
 }
 ```
-
-Learn more about [Users](/referral/users). 
