@@ -27,6 +27,10 @@ Used with the [Activation on Conversion](/referral/programs#activation) configur
 
 We recommend updating it whenever user's premium status changes. 
 
+<Info>
+We are working on a RevenueCat integration that will automatically update the `is_premium` flag.
+</Info>
+
 #### First Seen At
 
 Date when the user was first seen in your app. 
@@ -73,10 +77,6 @@ A web url to the referral code and its rewards which your app users can share wi
 Learn more about how to set up [Preview Link](/referral/preview-link).
 
 **Example**: `https://appname.wwk.link/XYZ123`
-
-#### Program
-
-An object containing complete information about the program assigned to the user.
 
 #### Claim Code Eligibility
 
@@ -133,14 +133,6 @@ The `eligible` field indicates whether the user can claim the referral code, whi
 }
 ```
 
-#### Rewards
-
-A list of active and expired rewards for the user.
-
-<Warning>
-Remember to unlock access to the active rewards in your app.
-</Warning>
-
 #### Stats
 
 An object with information about referral statistics for the user.
@@ -165,6 +157,83 @@ Correct tracking of Conversions and Churns requires updating [Is Premium](/refer
 }
 ```
 
+#### Rewards
+
+A list of active and expired rewards for the user.
+
+<Warning>
+Remember to unlock access to the active rewards in your app.
+</Warning>
+
+```json
+"rewards": {
+  "active": {
+    "basic": [
+      {
+        "reward": {
+          "key": "app-icon-neon",
+          "name": "App Icon Neon",
+          "description": "Access to an exclusive app icon",
+          "metadata": null,
+          "created_at": "2021-01-01T00:00:00.000Z",
+          "updated_at": "2021-01-01T00:00:00.000Z"
+        },
+        "expires_at": null,
+        "created_at": "2021-01-01T00:00:00.000Z",
+        "updated_at": "2021-01-01T00:00:00.000Z"
+      }
+    ],
+    "credit": [
+      {
+        "reward": {
+          "key": "20-ai-requests",
+          "credits": 20,
+          "name": "20 AI Requests",
+          "description": "Access to extra AI requests",
+          "metadata": null,
+          "created_at": "2021-01-01T00:00:00.000Z",
+          "updated_at": "2021-01-01T00:00:00.000Z"
+        },
+        "credits": 20,
+        "expires_at": "2021-01-01T00:00:00.000Z",
+        "created_at": "2021-01-01T00:00:00.000Z",
+        "updated_at": "2021-01-01T00:00:00.000Z"
+      }
+    ],
+    "offer_code": [
+      {
+        "reward": {
+          "key": "free-month",
+          "offer_code_id": "123e4567-e89b-12d3-a456-426614174000",
+          "name": "Free Month",
+          "description": "Receive a free month of a subscription",
+          "metadata": null,
+          "created_at": "2021-01-01T00:00:00.000Z",
+          "updated_at": "2021-01-01T00:00:00.000Z"
+        },
+        "value": {
+          "value": "ABCDEFGHIJKLMNOPQR",
+          "link": "https://apps.apple.com/redeem?ctx=offercodes&id=1234567890&code=ABCDEFGHIJKLMNOPQR",
+          "expires_at": "2021-01-01T00:00:00.000Z"
+        },
+        "expires_at": "2021-01-01T00:00:00.000Z",
+        "created_at": "2021-01-01T00:00:00.000Z",
+        "updated_at": "2021-01-01T00:00:00.000Z"
+      }
+    ]
+  },
+  "expired": {
+    "basic": [],
+    "credit": [],
+    "offer_code": []
+  }
+}
+```
+
+#### Program
+
+An object containing complete information about the program assigned to the user.
+
 ## Example
 
 Below is an example of a full referral user object returned by the [API](/api-reference/introduction).
@@ -172,157 +241,261 @@ Below is an example of a full referral user object returned by the [API](/api-re
 ```json
 {
   "data": {
-    "referral_user": {
+    "user": {
       "app_user_id": "821fae4b5-1a2d-4c1e-9152-5297086a161c",
       "code": "XYZ123",
-      "preview_link": "https://example.wwk.link/XYZ123",
-      "is_premium": true,
+      "preview_link": "https://appname.wwk.link/XYZ123",
+      "is_premium": false,
       "first_seen_at": "2024-11-10T10:28:18.104Z",
-      "last_seen_at": "2025-02-10T10:28:18.104Z",
-      "metadata": {
-        "key": "value"
-      },
-      "program": {
-        "id": "77dc-5508-40d3-8723-472e884b55fe",
-        "name": "Free month",
-        "description": "Free month for each invited user.",
-        "distribution_percentage": 100,
-        "limit": 100,
-        "metadata": {
-          "key": "value"
-        },
-        "rewards": {
-          "sender": {
-            "basic": {
-              "key": "extended-premium-trial",
-              "name": "Extended Premium Trial",
-              "description": "Extend Premium trial for 14 more days.",
-              "metadata": {
-                "key": "value"
-              },
-              "activationConfiguration": {
-                "variant": "claim",
-                "amount": 1
-              },
-              "deactivationConfiguration": {
-                "variant": "never"
-              }
-            },
-            "credit": {
-              "key": "credits-level-one",
-              "credits": 100,
-              "name": "Level one",
-              "description": "Grant credits for completing 100 levels.",
-              "metadata": {
-                "key": "value"
-              },
-              "limit": 0,
-              "activationConfiguration": {
-                "variant": "claim",
-                "amount": 1
-              },
-              "deactivationConfiguration": {
-                "variant": "never"
-              }
-            }
-          },
-          "receiver": {
-            "basic": {
-              "key": "extended-premium-trial",
-              "name": "Extended Premium Trial",
-              "description": "Extend Premium trial for 14 more days.",
-              "metadata": {
-                "key": "value"
-              },
-              "activationConfiguration": {
-                "variant": "claim"
-              },
-              "deactivationConfiguration": {
-                "variant": "never"
-              }
-            },
-            "credit": {
-              "key": "credits-level-one",
-              "credits": 100,
-              "name": "Level one",
-              "description": "Grant credits for completing 100 levels.",
-              "metadata": {
-                "key": "value"
-              },
-              "activationConfiguration": {
-                "variant": "claim"
-              },
-              "deactivationConfiguration": {
-                "variant": "never"
-              }
-            }
-          }
-        }
-      },
+      "last_seen_at": "2024-11-10T10:28:18.104Z",
+      "metadata": {},
       "claim_code_eligibility": {
         "eligible": true,
-        "eligible_until": "2025-02-10T10:28:18.104Z"
+        "eligible_until": "2024-11-10T10:28:18.104Z"
+      },
+      "stats": {
+        "claims": 0,
+        "conversions": 0,
+        "churns": 0
       },
       "rewards": {
         "active": {
           "basic": [
             {
-              "key": "extended-premium-trial",
-              "name": "Extended Premium Trial",
-              "description": "Extend Premium trial for 14 more days.",
-              "metadata": {
-                "key": "value"
+              "reward": {
+                "key": "basic-reward",
+                "name": "Basic Reward",
+                "description": "This is a basic reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
               },
-              "expires_at": null,
-              "created_at": "2025-02-10T10:28:18.104Z"
+              "expires_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
             }
           ],
           "credit": [
             {
-              "key": "credits-level-one",
-              "credits": 100,
-              "name": "Level one",
-              "description": "Grant credits for completing 100 levels.",
-              "metadata": {
-                "key": "value"
+              "reward": {
+                "key": "credit-reward",
+                "credits": 100,
+                "name": "Credit Reward",
+                "description": "This is a credit reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
               },
-              "expires_at": null,
-              "created_at": "2025-02-10T10:28:18.104Z"
+              "credits": 100,
+              "expires_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
+            }
+          ],
+          "offer_code": [
+            {
+              "reward": {
+                "key": "offer-code-reward",
+                "offer_code_id": "123e4567-e89b-12d3-a456-426614174000",
+                "name": "Offer Code Reward",
+                "description": "This is an offer code reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
+              },
+              "value": {
+                "value": "ABCDEFGHIJKLMNOPQR",
+                "link": "https://apps.apple.com/redeem?ctx=offercodes&id=1234567890&code=ABCDEFGHIJKLMNOPQR",
+                "expires_at": "2021-01-01T00:00:00.000Z"
+              },
+              "expires_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
             }
           ]
         },
         "expired": {
           "basic": [
             {
-              "key": "extended-premium-trial",
-              "name": "Extended Premium Trial",
-              "description": "Extend Premium trial for 14 more days.",
-              "metadata": {
-                "key": "value"
+              "reward": {
+                "key": "basic-reward",
+                "name": "Basic Reward",
+                "description": "This is a basic reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
               },
-              "expired_at": "2025-02-10T10:28:18.104Z",
-              "created_at": "2024-11-10T10:28:18.104Z"
+              "expired_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
             }
           ],
           "credit": [
             {
-              "key": "credits-level-one",
-              "credits": 100,
-              "name": "Level one",
-              "description": "Grant credits for completing 100 levels.",
-              "metadata": {
-                "key": "value"
+              "reward": {
+                "key": "credit-reward",
+                "credits": 100,
+                "name": "Credit Reward",
+                "description": "This is a credit reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
               },
-              "expired_at": "2025-02-10T10:28:18.104Z",
-              "created_at": "2024-11-10T10:28:18.104Z"
+              "expired_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
+            }
+          ],
+          "offer_code": [
+            {
+              "reward": {
+                "key": "offer-code-reward",
+                "offer_code_id": "123e4567-e89b-12d3-a456-426614174000",
+                "name": "Offer Code Reward",
+                "description": "This is an offer code reward",
+                "metadata": {},
+                "created_at": "2021-01-01T00:00:00.000Z",
+                "updated_at": "2021-01-01T00:00:00.000Z"
+              },
+              "expired_at": "2021-01-01T00:00:00.000Z",
+              "created_at": "2021-01-01T00:00:00.000Z",
+              "updated_at": "2021-01-01T00:00:00.000Z"
             }
           ]
         }
       },
-      "stats": {
-        "claims": 10,
-        "conversions": 8,
-        "churns": 1
+      "program": {
+        "id": "123e4567-e89b-12d3-a456-426614174000",
+        "name": "Referral Program #1",
+        "description": "This is a referral program",
+        "metadata": {},
+        "distribution_percentage": 100,
+        "limit": 0,
+        "rewards": {
+          "sender": {
+            "basic": [
+              {
+                "reward": {
+                  "key": "basic-reward",
+                  "name": "Basic Reward",
+                  "description": "This is a basic reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim",
+                  "amount": 1
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ],
+            "credit": [
+              {
+                "reward": {
+                  "key": "credit-reward",
+                  "credits": 100,
+                  "name": "Credit Reward",
+                  "description": "This is a credit reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim",
+                  "amount": 1,
+                  "limit": 1
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ],
+            "offer_code": [
+              {
+                "reward": {
+                  "key": "offer-code-reward",
+                  "offer_code_id": "123e4567-e89b-12d3-a456-426614174000",
+                  "name": "Offer Code Reward",
+                  "description": "This is an offer code reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim",
+                  "amount": 1,
+                  "limit": 1
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ]
+          },
+          "receiver": {
+            "basic": [
+              {
+                "reward": {
+                  "key": "basic-reward",
+                  "name": "Basic Reward",
+                  "description": "This is a basic reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim"
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ],
+            "credit": [
+              {
+                "reward": {
+                  "key": "credit-reward",
+                  "credits": 100,
+                  "name": "Credit Reward",
+                  "description": "This is a credit reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim"
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ],
+            "offer_code": [
+              {
+                "reward": {
+                  "key": "offer-code-reward",
+                  "offer_code_id": "123e4567-e89b-12d3-a456-426614174000",
+                  "name": "Offer Code Reward",
+                  "description": "This is an offer code reward",
+                  "metadata": {},
+                  "created_at": "2021-01-01T00:00:00.000Z",
+                  "updated_at": "2021-01-01T00:00:00.000Z"
+                },
+                "activation": {
+                  "variant": "claim"
+                },
+                "deactivation": {
+                  "variant": "never"
+                }
+              }
+            ]
+          }
+        },
+        "created_at": "2021-01-01T00:00:00.000Z",
+        "updated_at": "2021-01-01T00:00:00.000Z"
       }
     }
   }
