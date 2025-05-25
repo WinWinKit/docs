@@ -32,9 +32,13 @@ You’ll use this reference name to manage the offer in App Store Connect and to
 - **Expired subscribers**: Customers who were previously subscribed to a product within the group, but whose subscription has expired.
 
 <Info>
-All options are supported and practically don't make much difference from WinWinKit's perspective.
+All options are supported by WinWinKit.
+</Info>
+
+<Info>
 Note that WinWinKit does not store or provide any information about your user's current or past subscriptions.
 </Info>
+
 <Info>
 You might want to apply custom logic when displaying rewards for new, existing or expired subscribers. 
 </Info>
@@ -49,18 +53,18 @@ If your subscription has an introductory offer, determine whether people redeemi
 - **No**: Eligible customers will redeem the offer code first, then automatically renew to the standard subscription price without using the introductory offer. If they cancel and resubscribe at any point, they’re still eligible to redeem an introductory offer.
 
 <Info>
-All options are supported and practically don't make much difference from WinWinKit's perspective.
+All options are supported by WinWinKit.
 </Info>
 
 10. Click Next.
 
 11. Select the countries or regions where you want to make your offer available, then click Next.
 
-<Warning>
-WinWinKit does not fetch or filter availability by countries or regions. 
+<Info>
+**WinWinKit does not fetch or filter availability by countries or regions.**
 If your app is available globally, we recommend you select all.
 If you have custom requirements to availability you need to handle it on your side.
-</Warning>
+</Info>
 
 12. Select Type of Offer.
 
@@ -71,7 +75,7 @@ If you have custom requirements to availability you need to handle it on your si
   Learn more about [offer types](https://developer.apple.com/help/app-store-connect/reference/pricing-and-availability). 
 
 <Info>
-All options are supported and practically don't make much difference from WinWinKit's perspective.
+All options are supported by WinWinKit.
 </Info>
 
 ![Type of Offer](/images/offer-codes-app-store-connect-3.png)
@@ -80,9 +84,21 @@ All options are supported and practically don't make much difference from WinWin
 
 14. Make sure the details of your offer are correct and click Confirm.
 
+15. Congrats, your Offer Code is ready!
+
 <Info>
-Once you create an offer, you won’t be able to edit it. If changes to customer eligibility are needed, create a new offer.
+You can create multiple Offer Codes for the same or different subscriptions.
 </Info>
+
+<Info>
+Once you create an Offer Code, you won’t be able to edit it. If changes are needed, create a new one.
+</Info>
+
+<Warning>
+Be careful when deactivating an Offer Code if it is used with WinWinKit. Deactivating makes it unusable and will cause issues for app's users.
+</Warning>
+
+---
 
 For more information please refer to the App Store Connect documentation:
 - [Offer codes](https://developer.apple.com/app-store/subscriptions/#offer-codes)
