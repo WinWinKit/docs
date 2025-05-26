@@ -117,8 +117,11 @@
   "footer": {
     "socials": {
       "website": "https://winwinkit.com",
-      "github": "https://github.com/winwinkit",
-      "linkedin": "https://linkedin.com/company/winwinkit"
+      "reddit": "https://reddit.com/r/winwinkit",
+      "linkedin": "https://linkedin.com/company/winwinkit",
+      "bluesky": "https://bsky.app/profile/winwinkit.bsky.social",
+      "x-twitter": "https://x.com/winwin_kit",
+      "github": "https://github.com/winwinkit"
     }
   }
 }
