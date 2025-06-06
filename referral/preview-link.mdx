@@ -3,43 +3,70 @@ title: 'Preview Link'
 description: 'A web url to the referral code and its rewards which your app users can share to invite new users.'
 ---
 
-![Usage](/images/preview-link-usage.png)
+## Format
 
-An example of the Preview Link page for the [Usage](https://usage.pro) app.
+A preview link has the following format: `https://<subdomain>.wwk.link/<code>`.
+
+## Example
+
+An example of the Preview Link page for the [Usage](https://usage.pro) app, available at [https://usage.wwk.link/NMB231](https://usage.wwk.link/NMB231).
+
+**Simple**
+
+![Usage](/images/preview-link-usage-1.png)
+
+**With Deep Links**
+
+![Usage](/images/preview-link-usage-2.png)
 
 ## Setting Up
 
-To enabled Preview Links, go to the "Settings" tab on the sidebar.
+To configure the Preview Link feature, go to its tab on the sidebar.
 
-### General
+![Preview Link Sidebar](/images/preview-link-1.png)
 
-#### Logo
+### Subdomain
+
+Subdomain is required to enable the Preview Link feature.
+
+![Preview Link Subdomain](/images/preview-link-2.png)
+
+<Warning>
+  **Subdomain can be set only once.**
+</Warning>
+
+### Logo
 
 Upload app icon.
 
-#### Name
+### Name
 
 Name of the app.
 
-#### Description
+### Description
 
 Short description of the app. 
 
-#### Link
+### Link
 
-Set the link to where your app is available. This can be a link to the App Store or website.
+Set the link to where your app is available. This can be a link to the App Store or website. See [Deep Links](#deep-links) for more configuration options.
 
-#### Subdomain
+### Deep Links
 
-Set the subdomain that will be used in the URL for the Preview Links. This can only be saved once.
+Deep links are used to open the app directly from the Preview Link page.
 
-![General](/images/preview-link-1.png)
+Configure a deep link for each platform where your app is available, or set a single deep link that works across all platforms.
 
-### Preview Link
+<Tip>
+  Enter `$code` as part of your deep link url to receive a referral code value. 
+  
+  For example, `myapp://open/referral?code=$code` will result in `myapp://open/referral?code=XYZ123`, when the referral code is `XYZ123`.
+</Tip>
 
-This section displays the status and a preview of the Preview Link page for your app.
-
-![Preview Link](/images/preview-link-2.png)
+<Info>
+  You are responsible for setting up the deep links handling in your app.
+  When receiving a deep link, you can present a view, claim the received referral code, or implement any other functionality that suits your app's needs.
+</Info>
 
 ## Access
 
