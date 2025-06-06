@@ -82,6 +82,17 @@
         ]
       },
       {
+        "tab": "Changelog",
+        "groups": [
+          {
+            "group": "Changelog",
+            "pages": [
+              "changelog/product-updates"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Support",
         "groups": [
           {
