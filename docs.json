@@ -59,6 +59,7 @@
             "pages": [
               "integrations/api-keys",
               "integrations/swift-sdk",
+              "integrations/dart-sdk",
               "integrations/typescript-sdk"
             ]
           }

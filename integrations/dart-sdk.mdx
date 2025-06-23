@@ -1,0 +1,61 @@
+---
+title: "Dart SDK"
+description: "SDK for Dart and Flutter."
+---
+
+import SDKNoUIWarning from "/snippets/sdk-no-ui-warning.mdx";
+import UserIsPremiumRevenueCat from "/snippets/user-is-premium-revenue-cat.mdx";
+
+### Requirements
+
+The WinWinKit SDK is available in Dart 2.12.0 or later and can be used in your Flutter app.
+
+### Installation
+
+Add the following dependency to your pubspec.yaml
+
+```yaml
+dependencies:
+  WinWinKit:
+    git: https://github.com/winwinkit/winwinkit-dart.git
+```
+
+### Example
+
+```dart
+import "package:WinWinKit/api.dart";
+
+// Create or update user.
+final userApi = UsersApi();
+final userRequest = UserCreateRequest(
+  appUserId: 'your-app-user-id',
+);
+
+try {
+    final user = await userApi.createOrUpdateUser('your-api-key', userRequest);
+    print(user);
+}
+catch (e) {
+    print('Exception when calling UsersApi->createOrUpdateUser: $e\n');
+}
+
+...
+
+// Fetch offer code
+final offerCodeApi = AppStoreApi();
+
+try {
+    final result = offerCodeApi.getOfferCode('your-offer-code-id', 'your-api-key');
+    print(result);
+} catch (e) {
+    print('Exception when calling AppStoreApi->getOfferCode: $e\n');
+}
+```
+
+## Requirements
+
+- Dart 2.12.0+
+
+---
+
+[Check out the SDK on GitHub](https://github.com/winwinkit/winwinkit-dart)
