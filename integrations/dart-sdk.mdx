@@ -41,6 +41,22 @@ catch (e) {
 
 ...
 
+// Claim referral code.
+final claimActionsApi = ClaimActionsApi();
+final claimRequest = UserClaimReferralCodeRequest(
+  code: 'referral-code-to-claim',
+);
+
+try {
+    final response = await claimActionsApi.claimReferralCode('your-app-user-id', 'your-api-key', claimRequest);
+    print(response);
+}
+catch (e) {
+    print('Exception when calling ClaimActionsApi->claimReferralCode: $e\n');
+}
+
+...
+
 // Fetch offer code
 final offerCodeApi = AppStoreApi();
 
