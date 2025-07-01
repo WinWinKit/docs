@@ -131,7 +131,7 @@ paths:
       summary: Get User
       tags:
         - Users
-  /users/{app_user_id}/rewards/withdraw:
+  /users/{app_user_id}/rewards/withdraw-credits:
     post:
       description: Withdraws credits from a user.
       operationId: withdrawCredits
@@ -278,7 +278,7 @@ components:
         code:
           type: string
         status:
-          type: number
+          type: integer
         message:
           type: string
         source:
@@ -369,7 +369,7 @@ components:
           example: PAY_AS_YOU_GO
           description: The offer code offer mode.
         number_of_periods:
-          type: number
+          type: integer
           example: 1
           description: The offer code number of periods.
         prices:
@@ -500,15 +500,15 @@ components:
       type: object
       properties:
         claims:
-          type: number
+          type: integer
           example: 0
           description: The number of users who have claimed the referral code.
         conversions:
-          type: number
+          type: integer
           example: 0
           description: The number of users who have converted to premium.
         churns:
-          type: number
+          type: integer
           example: 0
           description: The number of users who have churned.
       description: The stats of the user.
@@ -592,7 +592,7 @@ components:
           example: credit-reward
           description: The key of the reward
         credits:
-          type: number
+          type: integer
           example: 100
           description: The credits of the reward
         name:
@@ -636,7 +636,7 @@ components:
           allOf:
             - $ref: '#/components/schemas/CreditReward'
         credits:
-          type: number
+          type: integer
           example: 100
           description: The amount of the reward
         expires_at:
@@ -762,6 +762,162 @@ components:
         - expires_at
         - created_at
         - updated_at
+    RevenueCatEntitlementReward:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the reward
+          example: premium-entitlement
+        entitlement_id:
+          type: string
+          description: The entitlement ID of the reward
+          example: entl1234567890
+        entitlement_key:
+          type: string
+          description: The entitlement key of the reward
+          example: premium
+        name:
+          type: string
+          description: The name of the reward
+          example: Premium Access
+        description:
+          type: string
+          nullable: true
+          example: This is an RevenueCat entitlement reward
+          description: The description of the reward
+        metadata:
+          type: object
+          nullable: true
+          example: {}
+          description: The metadata of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - key
+        - entitlement_id
+        - entitlement_key
+        - name
+        - description
+        - metadata
+        - created_at
+        - updated_at
+    UserRevenueCatEntitlementRewardActive:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatEntitlementReward'
+        expires_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The expiration date of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - reward
+        - expires_at
+        - created_at
+        - updated_at
+    RevenueCatOfferingReward:
+      type: object
+      properties:
+        key:
+          type: string
+          description: The key of the reward
+          example: discounted-offering
+        offering_id:
+          type: string
+          description: The offering ID of the reward
+          example: ofrng1234567890
+        offering_key:
+          type: string
+          description: The offering key of the reward
+          example: discounted
+        name:
+          type: string
+          description: The name of the reward
+          example: Discounted Offering
+        description:
+          type: string
+          nullable: true
+          example: This is an RevenueCat offering reward
+          description: The description of the reward
+        metadata:
+          type: object
+          nullable: true
+          example: {}
+          description: The metadata of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - key
+        - offering_id
+        - offering_key
+        - name
+        - description
+        - metadata
+        - created_at
+        - updated_at
+    UserRevenueCatOfferingRewardActive:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatOfferingReward'
+        expires_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The expiration date of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - reward
+        - expires_at
+        - created_at
+        - updated_at
     UserRewardsActive:
       type: object
       properties:
@@ -780,10 +936,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserOfferCodeRewardActive'
+        revenuecat_entitlement:
+          description: The referral user RevenueCat entitlement rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatEntitlementRewardActive'
+        revenuecat_offering:
+          description: The referral user RevenueCat offering rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatOfferingRewardActive'
       required:
         - basic
         - credit
         - offer_code
+        - revenuecat_entitlement
+        - revenuecat_offering
     UserBasicRewardExpired:
       type: object
       properties:
@@ -868,6 +1036,64 @@ components:
         - expired_at
         - created_at
         - updated_at
+    UserRevenueCatEntitlementRewardExpired:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatEntitlementReward'
+        expired_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The expiration date of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - reward
+        - expired_at
+        - created_at
+        - updated_at
+    UserRevenueCatOfferingRewardExpired:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatOfferingReward'
+        expired_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The expiration date of the reward
+        created_at:
+          format: date-time
+          type: string
+          example: '2021-01-01T00:00:00.000Z'
+          description: The created at of the reward
+        updated_at:
+          format: date-time
+          type: string
+          nullable: true
+          example: '2021-01-01T00:00:00.000Z'
+          description: The updated at of the reward
+      required:
+        - reward
+        - expired_at
+        - created_at
+        - updated_at
     UserRewardsExpired:
       type: object
       properties:
@@ -886,10 +1112,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserOfferCodeRewardExpired'
+        revenuecat_entitlement:
+          description: The referral user RevenueCat entitlement rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatEntitlementRewardExpired'
+        revenuecat_offering:
+          description: The referral user RevenueCat offering rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatOfferingRewardExpired'
       required:
         - basic
         - credit
         - offer_code
+        - revenuecat_entitlement
+        - revenuecat_offering
     UserRewards:
       type: object
       properties:
@@ -925,7 +1163,7 @@ components:
           example: interval
           description: The variant of the deactivation configuration
         duration:
-          type: number
+          type: integer
           example: 1
           description: The duration of the deactivation configuration
         period:
@@ -951,7 +1189,7 @@ components:
           example: claim
           description: The variant of the activation configuration
         amount:
-          type: number
+          type: integer
           example: 1
           description: The amount of the activation configuration
       required:
@@ -1001,7 +1239,7 @@ components:
           example: interval
           description: The variant of the deactivation configuration
         duration:
-          type: number
+          type: integer
           example: 1
           description: The duration of the deactivation configuration
         period:
@@ -1027,11 +1265,11 @@ components:
           example: claim
           description: The variant of the activation configuration
         amount:
-          type: number
+          type: integer
           example: 1
           description: The amount of the activation configuration
         limit:
-          type: number
+          type: integer
           example: 1
           description: The limit of the activation configuration
       required:
@@ -1082,7 +1320,7 @@ components:
           example: interval
           description: The variant of the deactivation configuration
         duration:
-          type: number
+          type: integer
           description: The duration of the deactivation configuration
           example: 1
         period:
@@ -1108,11 +1346,11 @@ components:
           example: claim
           description: The variant of the activation configuration
         amount:
-          type: number
+          type: integer
           example: 1
           description: The amount of the activation configuration
         limit:
-          type: number
+          type: integer
           example: 1
           description: The limit of the activation configuration
       required:
@@ -1143,6 +1381,162 @@ components:
         - reward
         - activation
         - deactivation
+    ProgramSenderRevenueCatEntitlementRewardNeverDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - never
+          example: never
+          description: The variant of the deactivation configuration
+      required:
+        - variant
+    ProgramSenderRevenueCatEntitlementRewardIntervalDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - interval
+          example: interval
+          description: The variant of the deactivation configuration
+        duration:
+          type: integer
+          example: 1
+          description: The duration of the deactivation configuration
+        period:
+          type: string
+          enum:
+            - days
+            - months
+            - years
+          example: days
+          description: The period of the deactivation configuration
+      required:
+        - variant
+        - duration
+        - period
+    ProgramSenderRevenueCatEntitlementRewardActivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - claim
+            - conversion
+          example: claim
+          description: The variant of the activation configuration
+        amount:
+          type: integer
+          example: 1
+          description: The amount of the activation configuration
+      required:
+        - variant
+        - amount
+    ProgramSenderRevenueCatEntitlementReward:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatEntitlementReward'
+        activation:
+          description: The activation configuration
+          allOf:
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardActivation
+        deactivation:
+          oneOf:
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardIntervalDeactivation
+          example:
+            variant: never
+          description: The deactivation configuration
+      required:
+        - reward
+        - activation
+        - deactivation
+    ProgramSenderRevenueCatOfferingRewardNeverDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - never
+          example: never
+          description: The variant of the deactivation configuration
+      required:
+        - variant
+    ProgramSenderRevenueCatOfferingRewardIntervalDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - interval
+          example: interval
+          description: The variant of the deactivation configuration
+        duration:
+          type: integer
+          example: 1
+          description: The duration of the deactivation configuration
+        period:
+          type: string
+          enum:
+            - days
+            - months
+            - years
+          example: days
+          description: The period of the deactivation configuration
+      required:
+        - variant
+        - duration
+        - period
+    ProgramSenderRevenueCatOfferingRewardActivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - claim
+            - conversion
+          example: claim
+          description: The variant of the activation configuration
+        amount:
+          type: integer
+          example: 1
+          description: The amount of the activation configuration
+      required:
+        - variant
+        - amount
+    ProgramSenderRevenueCatOfferingReward:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatOfferingReward'
+        activation:
+          description: The activation configuration
+          allOf:
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatOfferingRewardActivation
+        deactivation:
+          oneOf:
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatOfferingRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ProgramSenderRevenueCatOfferingRewardIntervalDeactivation
+          example:
+            variant: never
+          description: The deactivation configuration
+      required:
+        - reward
+        - activation
+        - deactivation
     ProgramSenderRewards:
       type: object
       properties:
@@ -1161,10 +1555,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProgramSenderOfferCodeReward'
+        revenuecat_entitlement:
+          description: The program RevenueCat entitlement rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramSenderRevenueCatEntitlementReward'
+        revenuecat_offering:
+          description: The program RevenueCat offering rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramSenderRevenueCatOfferingReward'
       required:
         - basic
         - credit
         - offer_code
+        - revenuecat_entitlement
+        - revenuecat_offering
     ProgramReceiverBasicRewardNeverDeactivation:
       type: object
       properties:
@@ -1186,7 +1592,7 @@ components:
           description: The variant of the deactivation configuration
           example: interval
         duration:
-          type: number
+          type: integer
           example: 1
           description: The duration of the deactivation configuration
         period:
@@ -1257,7 +1663,7 @@ components:
           example: interval
           description: The variant of the deactivation configuration
         duration:
-          type: number
+          type: integer
           example: 1
           description: The duration of the deactivation configuration
         period:
@@ -1329,7 +1735,7 @@ components:
           example: interval
           description: The variant of the deactivation configuration
         duration:
-          type: number
+          type: integer
           example: 1
           description: The duration of the deactivation configuration
         period:
@@ -1379,6 +1785,151 @@ components:
         - reward
         - activation
         - deactivation
+    ProgramReceiverRevenueCatEntitlementRewardNeverDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - never
+          example: never
+          description: The variant of the deactivation configuration
+      required:
+        - variant
+    ProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - interval
+          example: interval
+          description: The variant of the deactivation configuration
+        duration:
+          type: integer
+          example: 1
+          description: The duration of the deactivation configuration
+        period:
+          type: string
+          enum:
+            - days
+            - months
+            - years
+          example: days
+          description: The period of the deactivation configuration
+      required:
+        - variant
+        - duration
+        - period
+    ProgramReceiverRevenueCatEntitlementRewardActivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - claim
+            - conversion
+          example: claim
+          description: The variant of the activation configuration
+      required:
+        - variant
+    ProgramReceiverRevenueCatEntitlementReward:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatEntitlementReward'
+        activation:
+          description: The activation configuration
+          allOf:
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardActivation
+        deactivation:
+          oneOf:
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation
+          example:
+            variant: never
+          description: The deactivation configuration
+      required:
+        - reward
+        - activation
+        - deactivation
+    ProgramReceiverRevenueCatOfferingRewardNeverDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - never
+          example: never
+          description: The variant of the deactivation configuration
+      required:
+        - variant
+    ProgramReceiverRevenueCatOfferingRewardIntervalDeactivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - interval
+          example: interval
+          description: The variant of the deactivation configuration
+        duration:
+          type: integer
+          example: 1
+          description: The duration of the deactivation configuration
+        period:
+          type: string
+          enum:
+            - days
+            - months
+            - years
+          example: days
+          description: The period of the deactivation configuration
+      required:
+        - variant
+        - duration
+        - period
+    ProgramReceiverRevenueCatOfferingRewardActivation:
+      type: object
+      properties:
+        variant:
+          type: string
+          enum:
+            - claim
+          example: claim
+          description: The variant of the activation configuration
+      required:
+        - variant
+    ProgramReceiverRevenueCatOfferingReward:
+      type: object
+      properties:
+        reward:
+          description: The reward
+          allOf:
+            - $ref: '#/components/schemas/RevenueCatOfferingReward'
+        activation:
+          description: The activation configuration
+          allOf:
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardActivation
+        deactivation:
+          oneOf:
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardIntervalDeactivation
+          example:
+            variant: never
+          description: The deactivation configuration
+      required:
+        - reward
+        - activation
+        - deactivation
     ProgramReceiverRewards:
       type: object
       properties:
@@ -1397,10 +1948,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ProgramReceiverOfferCodeReward'
+        revenuecat_entitlement:
+          description: The program RevenueCat entitlement rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramReceiverRevenueCatEntitlementReward'
+        revenuecat_offering:
+          description: The program RevenueCat offering rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramReceiverRevenueCatOfferingReward'
       required:
         - basic
         - credit
         - offer_code
+        - revenuecat_entitlement
+        - revenuecat_offering
     ProgramRewards:
       type: object
       properties:
@@ -1437,11 +2000,11 @@ components:
           example: {}
           description: The program metadata
         distribution_percentage:
-          type: number
+          type: integer
           example: 100
           description: The program distribution percentage
         limit:
-          type: number
+          type: integer
           example: 0
           description: The program limit
         rewards:
@@ -1561,7 +2124,7 @@ components:
           example: credit-reward
           description: The key of the credit reward to withdraw
         amount:
-          type: number
+          type: integer
           example: 100
           description: The amount of credits to withdraw
           minimum: 1
@@ -1572,19 +2135,19 @@ components:
       type: object
       properties:
         credits_available_at_start:
-          type: number
+          type: integer
           example: 100
           description: The amount of credits available at the start
         credits_available_at_end:
-          type: number
+          type: integer
           example: 90
           description: The amount of credits available at the end
         credits_requested_to_withdraw:
-          type: number
+          type: integer
           example: 10
           description: The amount of credits requested to withdraw
         credits_withdrawn:
-          type: number
+          type: integer
           example: 10
           description: The amount of credits withdrawn
       required:
@@ -1640,10 +2203,22 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UserOfferCodeRewardActive'
+        revenuecat_entitlement:
+          description: The referral user RevenueCat entitlement rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatEntitlementRewardActive'
+        revenuecat_offering:
+          description: The referral user RevenueCat offering rewards
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRevenueCatOfferingRewardActive'
       required:
         - basic
         - credit
         - offer_code
+        - revenuecat_entitlement
+        - revenuecat_offering
     UserClaimReferralCodeResponse:
       type: object
       properties:
