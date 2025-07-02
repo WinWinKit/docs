@@ -1,12 +1,14 @@
 ---
-title: 'Rewards'
-description: 'A reward represent a level of access, feature, or content that a user is “rewarded” with.'
+title: "Rewards"
+description: "A reward represent a level of access, feature, or content that a user is “rewarded” with."
 ---
 
 ![Rewards](/images/rewards-list.png)
 
 <Info>
-If you're familiar with RevenueCat, WinWinKit's **Rewards** concept is similar to their [Entitlements](https://www.revenuecat.com/docs/getting-started/entitlements).
+  If you're familiar with RevenueCat, WinWinKit's **Rewards** concept is similar
+  to their
+  [Entitlements](https://www.revenuecat.com/docs/getting-started/entitlements).
 </Info>
 
 ## Reward Types
@@ -30,14 +32,16 @@ Below are a few of then:
 A Credit Reward is a type of reward that provides users with credits that can be used within the app.
 
 <Info>
-Remember to [withdraw credits](/api-reference/rewards-actions/withdraw-credits) when the user utilizes them.
+  Remember to [withdraw
+  credits](/api-reference/rewards-actions/withdraw-credits) when the user
+  utilizes them.
 </Info>
 
 **Examples**
 
 - **Trial Days**: Grant a user with a number of trial days. One day equals one credit.
 - **AI Requests**: Grant additional requests as a reward. One request equals one credit.
-- **Game Levels**: Unlock a number of levels in a game. One level equals one credit. 
+- **Game Levels**: Unlock a number of levels in a game. One level equals one credit.
 
 ### Offer Code
 
@@ -46,11 +50,32 @@ An Offer Code reward provides users with an App Store Offer Code that grants the
 **Examples**
 
 - **Discounted Start**: Give a user discounted first three months of a monthly subscription.
-- **Cheaper First Year**: Attract a user with a lower price for the first year of a yearly subscription. 
+- **Cheaper First Year**: Attract a user with a lower price for the first year of a yearly subscription.
 - **Free Month**: Reward with a free month of their active subscription for each invited user.
 - **Trial Period**: Enable a trial period on a subscription that otherwise is not available.
 
 Learn more about [Offer Codes](/offer-codes/introduction).
+
+### Entitlement
+
+A reward that provides users with a RevenueCat Entitlement.
+
+**Examples**
+
+- **Feature Access**: Grant access to a feature as a reward for engaging with referrals.
+- **Premium Access**: Grant access to premium features for a limited time.
+
+Learn more about [RevenueCat Entitlements](https://www.revenuecat.com/docs/getting-started/entitlements).
+
+### Offering
+
+A reward that provides users with a RevenueCat Offering.
+
+**Examples**
+
+- **Special Offering**: Set a special offering for newcomers from a referral invite.
+
+Learn more about [RevenueCat Offerings](https://www.revenuecat.com/docs/offerings/overview).
 
 ## Setting Up
 
@@ -62,7 +87,7 @@ The type of the reward.
 
 #### Name and Description
 
-Name and optional description. Will be shown to the users with [Preview Link](/referral/preview-link) enabled. 
+Name and optional description. Will be shown to the users with [Preview Link](/referral/preview-link) enabled.
 
 #### Key
 
@@ -87,14 +112,14 @@ Only applicable to the Offer Code reward type.
 
 #### Metadata
 
-This allows you to provide extra configuration and metadata making it flexible to meet your specific needs. 
+This allows you to provide extra configuration and metadata making it flexible to meet your specific needs.
 Must be a valid JSON object.
 
 ## Example Rewards
 
 ### Basic
 
-Let's create a simple reward that rewards users with an extra app icon. 
+Let's create a simple reward that rewards users with an extra app icon.
 
 **Step-by-step guide**
 
