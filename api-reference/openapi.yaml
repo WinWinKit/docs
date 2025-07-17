@@ -188,15 +188,15 @@ paths:
       summary: Withdraw Credits
       tags:
         - Rewards Actions
-  /users/{app_user_id}/claim/referral-code:
+  /users/{app_user_id}/claim-code:
     post:
-      description: Claims a referral code for a user.
-      operationId: claimReferralCode
+      description: Claims a code for a user. Code can be affiliate, promo or referral code.
+      operationId: claimCode
       parameters:
         - name: app_user_id
           required: true
           in: path
-          description: The app user id of the user to claim the referral code for.
+          description: The app user id of the user to claim the code for.
           schema:
             type: string
         - name: x-api-key
@@ -210,14 +210,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UserClaimReferralCodeRequest'
+              $ref: '#/components/schemas/UserClaimCodeRequest'
       responses:
         '200':
-          description: The granted rewards
+          description: Updated user and granted rewards.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/UserClaimReferralCodeDataResponse'
+                $ref: '#/components/schemas/UserClaimCodeDataResponse'
         '400':
           description: The request is invalid.
           content:
@@ -242,7 +242,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorsResponse'
-      summary: Claim Referral Code
+      summary: Claim Code
       tags:
         - Claim Actions
 info:
@@ -1142,7 +1142,7 @@ components:
       required:
         - active
         - expired
-    ProgramSenderBasicRewardNeverDeactivation:
+    ReferralProgramSenderBasicRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1153,7 +1153,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramSenderBasicRewardIntervalDeactivation:
+    ReferralProgramSenderBasicRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1178,7 +1178,7 @@ components:
         - variant
         - duration
         - period
-    ProgramSenderBasicRewardActivation:
+    ReferralProgramSenderBasicRewardActivation:
       type: object
       properties:
         variant:
@@ -1195,7 +1195,7 @@ components:
       required:
         - variant
         - amount
-    ProgramSenderBasicReward:
+    ReferralProgramSenderBasicReward:
       type: object
       properties:
         reward:
@@ -1205,12 +1205,13 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramSenderBasicRewardActivation'
+            - $ref: '#/components/schemas/ReferralProgramSenderBasicRewardActivation'
         deactivation:
           oneOf:
-            - $ref: '#/components/schemas/ProgramSenderBasicRewardNeverDeactivation'
             - $ref: >-
-                #/components/schemas/ProgramSenderBasicRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramSenderBasicRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ReferralProgramSenderBasicRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1218,7 +1219,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramSenderCreditRewardNeverDeactivation:
+    ReferralProgramSenderCreditRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1229,7 +1230,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramSenderCreditRewardIntervalDeactivation:
+    ReferralProgramSenderCreditRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1254,7 +1255,7 @@ components:
         - variant
         - duration
         - period
-    ProgramSenderCreditRewardActivation:
+    ReferralProgramSenderCreditRewardActivation:
       type: object
       properties:
         variant:
@@ -1276,7 +1277,7 @@ components:
         - variant
         - amount
         - limit
-    ProgramSenderCreditReward:
+    ReferralProgramSenderCreditReward:
       type: object
       properties:
         reward:
@@ -1286,12 +1287,13 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramSenderCreditRewardActivation'
+            - $ref: '#/components/schemas/ReferralProgramSenderCreditRewardActivation'
         deactivation:
           oneOf:
-            - $ref: '#/components/schemas/ProgramSenderCreditRewardNeverDeactivation'
             - $ref: >-
-                #/components/schemas/ProgramSenderCreditRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramSenderCreditRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ReferralProgramSenderCreditRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1299,7 +1301,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramSenderOfferCodeRewardNeverDeactivation:
+    ReferralProgramSenderOfferCodeRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1310,7 +1312,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramSenderOfferCodeRewardIntervalDeactivation:
+    ReferralProgramSenderOfferCodeRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1335,7 +1337,7 @@ components:
         - variant
         - duration
         - period
-    ProgramSenderOfferCodeRewardActivation:
+    ReferralProgramSenderOfferCodeRewardActivation:
       type: object
       properties:
         variant:
@@ -1357,7 +1359,7 @@ components:
         - variant
         - amount
         - limit
-    ProgramSenderOfferCodeReward:
+    ReferralProgramSenderOfferCodeReward:
       type: object
       properties:
         reward:
@@ -1367,13 +1369,14 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramSenderOfferCodeRewardActivation'
+            - $ref: >-
+                #/components/schemas/ReferralProgramSenderOfferCodeRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramSenderOfferCodeRewardNeverDeactivation
+                #/components/schemas/ReferralProgramSenderOfferCodeRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramSenderOfferCodeRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramSenderOfferCodeRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1381,7 +1384,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramSenderRevenueCatEntitlementRewardNeverDeactivation:
+    ReferralProgramSenderRevenueCatEntitlementRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1392,7 +1395,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramSenderRevenueCatEntitlementRewardIntervalDeactivation:
+    ReferralProgramSenderRevenueCatEntitlementRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1417,7 +1420,7 @@ components:
         - variant
         - duration
         - period
-    ProgramSenderRevenueCatEntitlementRewardActivation:
+    ReferralProgramSenderRevenueCatEntitlementRewardActivation:
       type: object
       properties:
         variant:
@@ -1434,7 +1437,7 @@ components:
       required:
         - variant
         - amount
-    ProgramSenderRevenueCatEntitlementReward:
+    ReferralProgramSenderRevenueCatEntitlementReward:
       type: object
       properties:
         reward:
@@ -1445,13 +1448,13 @@ components:
           description: The activation configuration
           allOf:
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardActivation
+                #/components/schemas/ReferralProgramSenderRevenueCatEntitlementRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardNeverDeactivation
+                #/components/schemas/ReferralProgramSenderRevenueCatEntitlementRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatEntitlementRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramSenderRevenueCatEntitlementRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1459,7 +1462,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramSenderRevenueCatOfferingRewardNeverDeactivation:
+    ReferralProgramSenderRevenueCatOfferingRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1470,7 +1473,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramSenderRevenueCatOfferingRewardIntervalDeactivation:
+    ReferralProgramSenderRevenueCatOfferingRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1495,7 +1498,7 @@ components:
         - variant
         - duration
         - period
-    ProgramSenderRevenueCatOfferingRewardActivation:
+    ReferralProgramSenderRevenueCatOfferingRewardActivation:
       type: object
       properties:
         variant:
@@ -1512,7 +1515,7 @@ components:
       required:
         - variant
         - amount
-    ProgramSenderRevenueCatOfferingReward:
+    ReferralProgramSenderRevenueCatOfferingReward:
       type: object
       properties:
         reward:
@@ -1523,13 +1526,13 @@ components:
           description: The activation configuration
           allOf:
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatOfferingRewardActivation
+                #/components/schemas/ReferralProgramSenderRevenueCatOfferingRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatOfferingRewardNeverDeactivation
+                #/components/schemas/ReferralProgramSenderRevenueCatOfferingRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramSenderRevenueCatOfferingRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramSenderRevenueCatOfferingRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1537,41 +1540,42 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramSenderRewards:
+    ReferralProgramSenderRewards:
       type: object
       properties:
         basic:
           description: The program basic rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramSenderBasicReward'
+            $ref: '#/components/schemas/ReferralProgramSenderBasicReward'
         credit:
           description: The program credit rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramSenderCreditReward'
+            $ref: '#/components/schemas/ReferralProgramSenderCreditReward'
         offer_code:
           description: The program offer code rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramSenderOfferCodeReward'
+            $ref: '#/components/schemas/ReferralProgramSenderOfferCodeReward'
         revenuecat_entitlement:
           description: The program RevenueCat entitlement rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramSenderRevenueCatEntitlementReward'
+            $ref: >-
+              #/components/schemas/ReferralProgramSenderRevenueCatEntitlementReward
         revenuecat_offering:
           description: The program RevenueCat offering rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramSenderRevenueCatOfferingReward'
+            $ref: '#/components/schemas/ReferralProgramSenderRevenueCatOfferingReward'
       required:
         - basic
         - credit
         - offer_code
         - revenuecat_entitlement
         - revenuecat_offering
-    ProgramReceiverBasicRewardNeverDeactivation:
+    ReferralProgramReceiverBasicRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1582,7 +1586,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramReceiverBasicRewardIntervalDeactivation:
+    ReferralProgramReceiverBasicRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1607,7 +1611,7 @@ components:
         - variant
         - duration
         - period
-    ProgramReceiverBasicRewardActivation:
+    ReferralProgramReceiverBasicRewardActivation:
       type: object
       properties:
         variant:
@@ -1619,7 +1623,7 @@ components:
           description: The variant of the activation configuration
       required:
         - variant
-    ProgramReceiverBasicReward:
+    ReferralProgramReceiverBasicReward:
       type: object
       properties:
         reward:
@@ -1629,12 +1633,14 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramReceiverBasicRewardActivation'
+            - $ref: >-
+                #/components/schemas/ReferralProgramReceiverBasicRewardActivation
         deactivation:
           oneOf:
-            - $ref: '#/components/schemas/ProgramReceiverBasicRewardNeverDeactivation'
             - $ref: >-
-                #/components/schemas/ProgramReceiverBasicRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramReceiverBasicRewardNeverDeactivation
+            - $ref: >-
+                #/components/schemas/ReferralProgramReceiverBasicRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1642,7 +1648,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramReceiverCreditRewardNeverDeactivation:
+    ReferralProgramReceiverCreditRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1653,7 +1659,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramReceiverCreditRewardIntervalDeactivation:
+    ReferralProgramReceiverCreditRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1678,7 +1684,7 @@ components:
         - variant
         - duration
         - period
-    ProgramReceiverCreditRewardActivation:
+    ReferralProgramReceiverCreditRewardActivation:
       type: object
       properties:
         variant:
@@ -1690,7 +1696,7 @@ components:
           description: The variant of the activation configuration
       required:
         - variant
-    ProgramReceiverCreditReward:
+    ReferralProgramReceiverCreditReward:
       type: object
       properties:
         reward:
@@ -1700,13 +1706,14 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramReceiverCreditRewardActivation'
+            - $ref: >-
+                #/components/schemas/ReferralProgramReceiverCreditRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverCreditRewardNeverDeactivation
+                #/components/schemas/ReferralProgramReceiverCreditRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramReceiverCreditRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramReceiverCreditRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1714,7 +1721,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramReceiverOfferCodeRewardNeverDeactivation:
+    ReferralProgramReceiverOfferCodeRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1725,7 +1732,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramReceiverOfferCodeRewardIntervalDeactivation:
+    ReferralProgramReceiverOfferCodeRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1750,7 +1757,7 @@ components:
         - variant
         - duration
         - period
-    ProgramReceiverOfferCodeRewardActivation:
+    ReferralProgramReceiverOfferCodeRewardActivation:
       type: object
       properties:
         variant:
@@ -1761,7 +1768,7 @@ components:
           description: The variant of the activation configuration
       required:
         - variant
-    ProgramReceiverOfferCodeReward:
+    ReferralProgramReceiverOfferCodeReward:
       type: object
       properties:
         reward:
@@ -1771,13 +1778,14 @@ components:
         activation:
           description: The activation configuration
           allOf:
-            - $ref: '#/components/schemas/ProgramReceiverOfferCodeRewardActivation'
+            - $ref: >-
+                #/components/schemas/ReferralProgramReceiverOfferCodeRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverOfferCodeRewardNeverDeactivation
+                #/components/schemas/ReferralProgramReceiverOfferCodeRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramReceiverOfferCodeRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramReceiverOfferCodeRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1785,7 +1793,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramReceiverRevenueCatEntitlementRewardNeverDeactivation:
+    ReferralProgramReceiverRevenueCatEntitlementRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1796,7 +1804,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation:
+    ReferralProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1821,7 +1829,7 @@ components:
         - variant
         - duration
         - period
-    ProgramReceiverRevenueCatEntitlementRewardActivation:
+    ReferralProgramReceiverRevenueCatEntitlementRewardActivation:
       type: object
       properties:
         variant:
@@ -1833,7 +1841,7 @@ components:
           description: The variant of the activation configuration
       required:
         - variant
-    ProgramReceiverRevenueCatEntitlementReward:
+    ReferralProgramReceiverRevenueCatEntitlementReward:
       type: object
       properties:
         reward:
@@ -1844,13 +1852,13 @@ components:
           description: The activation configuration
           allOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardActivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatEntitlementRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardNeverDeactivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatEntitlementRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatEntitlementRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1858,7 +1866,7 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramReceiverRevenueCatOfferingRewardNeverDeactivation:
+    ReferralProgramReceiverRevenueCatOfferingRewardNeverDeactivation:
       type: object
       properties:
         variant:
@@ -1869,7 +1877,7 @@ components:
           description: The variant of the deactivation configuration
       required:
         - variant
-    ProgramReceiverRevenueCatOfferingRewardIntervalDeactivation:
+    ReferralProgramReceiverRevenueCatOfferingRewardIntervalDeactivation:
       type: object
       properties:
         variant:
@@ -1894,7 +1902,7 @@ components:
         - variant
         - duration
         - period
-    ProgramReceiverRevenueCatOfferingRewardActivation:
+    ReferralProgramReceiverRevenueCatOfferingRewardActivation:
       type: object
       properties:
         variant:
@@ -1905,7 +1913,7 @@ components:
           description: The variant of the activation configuration
       required:
         - variant
-    ProgramReceiverRevenueCatOfferingReward:
+    ReferralProgramReceiverRevenueCatOfferingReward:
       type: object
       properties:
         reward:
@@ -1916,13 +1924,13 @@ components:
           description: The activation configuration
           allOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardActivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatOfferingRewardActivation
         deactivation:
           oneOf:
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardNeverDeactivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatOfferingRewardNeverDeactivation
             - $ref: >-
-                #/components/schemas/ProgramReceiverRevenueCatOfferingRewardIntervalDeactivation
+                #/components/schemas/ReferralProgramReceiverRevenueCatOfferingRewardIntervalDeactivation
           example:
             variant: never
           description: The deactivation configuration
@@ -1930,55 +1938,57 @@ components:
         - reward
         - activation
         - deactivation
-    ProgramReceiverRewards:
+    ReferralProgramReceiverRewards:
       type: object
       properties:
         basic:
           description: The program basic rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramReceiverBasicReward'
+            $ref: '#/components/schemas/ReferralProgramReceiverBasicReward'
         credit:
           description: The program credit rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramReceiverCreditReward'
+            $ref: '#/components/schemas/ReferralProgramReceiverCreditReward'
         offer_code:
           description: The program offer code rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramReceiverOfferCodeReward'
+            $ref: '#/components/schemas/ReferralProgramReceiverOfferCodeReward'
         revenuecat_entitlement:
           description: The program RevenueCat entitlement rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramReceiverRevenueCatEntitlementReward'
+            $ref: >-
+              #/components/schemas/ReferralProgramReceiverRevenueCatEntitlementReward
         revenuecat_offering:
           description: The program RevenueCat offering rewards
           type: array
           items:
-            $ref: '#/components/schemas/ProgramReceiverRevenueCatOfferingReward'
+            $ref: >-
+              #/components/schemas/ReferralProgramReceiverRevenueCatOfferingReward
       required:
         - basic
         - credit
         - offer_code
         - revenuecat_entitlement
         - revenuecat_offering
-    ProgramRewards:
+    ReferralProgramRewards:
       type: object
       properties:
         sender:
           description: The program sender rewards
           allOf:
-            - $ref: '#/components/schemas/ProgramSenderRewards'
+            - $ref: '#/components/schemas/ReferralProgramSenderRewards'
         receiver:
           description: The program receiver rewards
           allOf:
-            - $ref: '#/components/schemas/ProgramReceiverRewards'
+            - $ref: '#/components/schemas/ReferralProgramReceiverRewards'
       required:
         - sender
         - receiver
-    Program:
+    ReferralProgram:
       type: object
       properties:
         id:
@@ -2010,7 +2020,7 @@ components:
         rewards:
           description: The program rewards
           allOf:
-            - $ref: '#/components/schemas/ProgramRewards'
+            - $ref: '#/components/schemas/ReferralProgramRewards'
         created_at:
           format: date-time
           type: string
@@ -2039,16 +2049,16 @@ components:
           type: string
           example: 821fae4b5-1a2d-4c1e-9152-5297086a161c
           description: The unique identifier of the user in your app.
-        code:
+        referral_code:
           type: string
           example: XYZ123
           nullable: true
           description: The referral code of the user.
-        preview_link:
+        referral_code_link:
           type: string
           nullable: true
           example: https://appname.wwk.link/XYZ123
-          description: The preview link of the user.
+          description: The referral code link of the user.
         is_premium:
           type: boolean
           nullable: true
@@ -2083,15 +2093,15 @@ components:
           description: The rewards of the user.
           allOf:
             - $ref: '#/components/schemas/UserRewards'
-        program:
+        referral_program:
           nullable: true
           description: The program of the user.
           allOf:
-            - $ref: '#/components/schemas/Program'
+            - $ref: '#/components/schemas/ReferralProgram'
       required:
         - app_user_id
-        - code
-        - preview_link
+        - referral_code
+        - referral_code_link
         - is_premium
         - first_seen_at
         - last_seen_at
@@ -2099,7 +2109,7 @@ components:
         - claim_code_eligibility
         - stats
         - rewards
-        - program
+        - referral_program
     UserResponse:
       type: object
       properties:
@@ -2176,13 +2186,13 @@ components:
           $ref: '#/components/schemas/UserWithdrawCreditsResponse'
       required:
         - data
-    UserClaimReferralCodeRequest:
+    UserClaimCodeRequest:
       type: object
       properties:
         code:
           type: string
           example: XYZ123
-          description: The referral code to claim
+          description: The code to claim. Can be affiliate, promo or referral code.
       required:
         - code
     UserRewardsGranted:
@@ -2219,24 +2229,24 @@ components:
         - offer_code
         - revenuecat_entitlement
         - revenuecat_offering
-    UserClaimReferralCodeResponse:
+    UserClaimCodeResponse:
       type: object
       properties:
         rewards_granted:
-          description: The rewards granted to the user
+          description: The rewards granted to the user.
           allOf:
             - $ref: '#/components/schemas/UserRewardsGranted'
         user:
-          description: The user
+          description: The updated user.
           allOf:
             - $ref: '#/components/schemas/User'
       required:
         - rewards_granted
         - user
-    UserClaimReferralCodeDataResponse:
+    UserClaimCodeDataResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/UserClaimReferralCodeResponse'
+          $ref: '#/components/schemas/UserClaimCodeResponse'
       required:
         - data

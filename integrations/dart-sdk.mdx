@@ -41,18 +41,18 @@ catch (e) {
 
 ...
 
-// Claim referral code.
+// Claim code.
 final claimActionsApi = ClaimActionsApi();
-final claimRequest = UserClaimReferralCodeRequest(
-  code: 'referral-code-to-claim',
+final claimRequest = UserClaimCodeRequest(
+  code: 'code-to-claim',
 );
 
 try {
-    final response = await claimActionsApi.claimReferralCode('your-app-user-id', 'your-api-key', claimRequest);
+    final response = await claimActionsApi.claimCode('your-app-user-id', 'your-api-key', claimRequest);
     print(response);
 }
 catch (e) {
-    print('Exception when calling ClaimActionsApi->claimReferralCode: $e\n');
+    print('Exception when calling ClaimActionsApi->claimCode: $e\n');
 }
 
 ...

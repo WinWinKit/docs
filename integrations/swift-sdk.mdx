@@ -1,14 +1,14 @@
 ---
-title: 'Swift SDK'
-description: 'SDK for iOS and macOS.'
+title: "Swift SDK"
+description: "SDK for iOS and macOS."
 ---
 
-import SDKNoUIWarning from '/snippets/sdk-no-ui-warning.mdx'
-import UserIsPremiumRevenueCat from '/snippets/user-is-premium-revenue-cat.mdx'
+import SDKNoUIWarning from "/snippets/sdk-no-ui-warning.mdx";
+import UserIsPremiumRevenueCat from "/snippets/user-is-premium-revenue-cat.mdx";
 
 ### Requirements
 
-The WinWinKit SDK is available in native Swift and supports iOS 16 and macOS 13 or later. 
+The WinWinKit SDK is available in native Swift and supports iOS 16 and macOS 13 or later.
 
 ### Installation
 
@@ -16,14 +16,14 @@ The WinWinKit SDK is available in native Swift and supports iOS 16 and macOS 13 
 
 You can use Swift Package Manager to add WinWinKit to your Xcode project:
 
-1. In Xcode select "File" -> "Add Packages Dependencies" 
+1. In Xcode select "File" -> "Add Packages Dependencies"
 2. Enter the repository URL:
 
 ```
 https://github.com/winwinkit/winwinkit-swift.git
 ```
 
-3. Press “Add Package”. 
+3. Press “Add Package”.
 
 The library should be added to the Package Dependencies and you should be able to `import WinWinKit` in your source files.
 
@@ -42,7 +42,7 @@ Referrals.shared.set(appUserId: "your-app-user-id")
 **Set the First Seen At**
 
 Recommended to set first seen at which is the date when the user was first seen in your app.
-This is used to evaluate user's eligibility to claim code of another user. By default it is 7 days since the first seen at date. 
+This is used to evaluate user's eligibility to claim code of another user. By default it is 7 days since the first seen at date.
 
 If not set, the first seen at is the date the user was created in WinWinKit.
 
@@ -90,10 +90,12 @@ let user = Referrals.shared.user
 
 > Also available as a property of `ReferralsObservableObject` (see below).
 
-### Claim Referral Code
+### Claim Code
+
+Claim a code for a user. Code can be affiliate, promo or referral code.
 
 ```swift
-let (user, rewardsGranted) = try await Referrals.shared.claimReferralCode(code: "XYZ123")
+let (user, rewardsGranted) = try await Referrals.shared.claimCode(code: "XYZ123")
  // Grant access to rewards in your app
 ```
 
@@ -105,6 +107,7 @@ let (offerCode, subscription) = try await Referrals.shared.fetchOfferCode(offerC
 ```
 
 ### Withdraw Credits
+
 ```swift
 let (user, withdrawResult) = try await Referrals.shared.withdrawCredits(key: "extra-levels", amount: 5)
 ```
@@ -124,21 +127,22 @@ Provides observable `User` object, methods and states for interacting with WinWi
 
 VStack {
     Text("Your referral code")
-    Text(self.referralsObservableObject.user?.code ?? "-")
+    Text(self.referralsObservableObject.user?.referralCode ?? "-")
       .font(.title3)
 }
 
 ...
 
 Button(action: {
-    self.referralsObservableObject.claimReferralCode(code: self.code)
+    self.referralsObservableObject.claimCode(code: self.code)
 }) {
     Text("Claim")
 }
 ```
 
 <Tip>
-In SwiftUI only apps it is possible to build complete integration with only this observable object.
+  In SwiftUI only apps it is possible to build complete integration with only
+  this observable object.
 </Tip>
 
 ### User Interface
@@ -159,13 +163,13 @@ Referrals.shared.delegate = delegate
 
 
 final class Delegate: ReferralsDelegate {
-    
+
     init() {}
 
     func referrals(_ referrals: Referrals, receivedUpdated user: User?) {
         // Called every time the user is updated.
     }
-    
+
     func referrals(_ referrals: Referrals, receivedError error: any Error) {
         // Received error when creating, updating or fetching the user.
     }
