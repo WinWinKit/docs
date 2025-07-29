@@ -1,6 +1,6 @@
 ---
-title: 'Preview Link'
-description: 'A web url to the referral code and its rewards which your app users can share to invite new users.'
+title: "Code Link"
+description: "A web url to the referral code and its rewards which your app users can share to invite new users."
 ---
 
 ## Format
@@ -31,9 +31,7 @@ Subdomain is required to enable the Preview Link feature.
 
 ![Preview Link Subdomain](/images/preview-link-2.png)
 
-<Warning>
-  **Subdomain can be set only once.**
-</Warning>
+<Warning>**Subdomain can be set only once.**</Warning>
 
 ### Logo
 
@@ -45,7 +43,7 @@ Name of the app.
 
 ### Description
 
-Short description of the app. 
+Short description of the app.
 
 ### Link
 
@@ -58,14 +56,15 @@ Deep links are used to open the app directly from the Preview Link page.
 Configure a deep link for each platform where your app is available, or set a single deep link that works across all platforms.
 
 <Tip>
-  Enter `$code` as part of your deep link url to receive a referral code value. 
-  
-  For example, `myapp://open/referral?code=$code` will result in `myapp://open/referral?code=XYZ123`, when the referral code is `XYZ123`.
+  Enter `$code` as part of your deep link url to receive a referral code value.
+  For example, `myapp://open/referral?code=$code` will result in
+  `myapp://open/referral?code=XYZ123`, when the referral code is `XYZ123`.
 </Tip>
 
 <Info>
-  You are responsible for setting up the deep links handling in your app.
-  When receiving a deep link, you can present a view, claim the received referral code, or implement any other functionality that suits your app's needs.
+  You are responsible for setting up the deep links handling in your app. When
+  receiving a deep link, you can present a view, claim the received referral
+  code, or implement any other functionality that suits your app's needs.
 </Info>
 
 ## Access
@@ -81,7 +80,8 @@ let previewLink = Referrals.shared.user?.previewLink
 ```
 
 Or in a SwiftUI view from the observable object:
-```swift 
+
+```swift
 @State var referralsObservableObject = Referrals.shared.observableObject
 
 ...
@@ -96,7 +96,7 @@ Learn more about [Swift SDK](/integrations/swift-sdk).
 The Preview Link value is available on the user object as the `preview_link` property.
 
 ```typescript
-const user = await winwinkit.fetchUser({appUserId: "<app-user-id>"});
+const user = await winwinkit.fetchUser({ appUserId: "<app-user-id>" });
 const previewLink = user?.preview_link;
 ```
 

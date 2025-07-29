@@ -37,28 +37,29 @@
             ]
           },
           {
-            "group": "Rewards",
+            "group": "Features",
             "pages": [
-              "rewards/introduction",
-              "rewards/basic",
-              "rewards/credit",
-              "rewards/offer-code",
-              "rewards/revenuecat-entitlement",
-              "rewards/revenuecat-offering"
-            ]
-          },
-          {
-            "group": "Referral",
-            "pages": [
-              "referral/programs",
-              "referral/users",
-              "referral/preview-link"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/app-store-connect"
+              {
+                "group": "Rewards",
+                "pages": [
+                  "rewards/introduction",
+                  "rewards/basic",
+                  "rewards/credit",
+                  "rewards/offer-code",
+                  "rewards/revenuecat-entitlement",
+                  "rewards/revenuecat-offering"
+                ]
+              },
+              "referrals/referrals",
+              "affiliates/affiliates",
+              "promos/promos",
+              "users/users",
+              {
+                "group": "Pages",
+                "pages": [
+                  "pages/code-link"
+                ]
+              }
             ]
           },
           {
