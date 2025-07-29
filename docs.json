@@ -37,21 +37,28 @@
             ]
           },
           {
+            "group": "Rewards",
+            "pages": [
+              "rewards/introduction",
+              "rewards/basic",
+              "rewards/credit",
+              "rewards/offer-code",
+              "rewards/revenuecat-entitlement",
+              "rewards/revenuecat-offering"
+            ]
+          },
+          {
             "group": "Referral",
             "pages": [
-              "referral/rewards",
               "referral/programs",
               "referral/users",
               "referral/preview-link"
             ]
           },
           {
-            "group": "Offer Codes",
+            "group": "Integrations",
             "pages": [
-              "offer-codes/introduction",
-              "offer-codes/create",
-              "offer-codes/enable",
-              "offer-codes/integrate"
+              "integrations/app-store-connect"
             ]
           },
           {

@@ -1,6 +1,6 @@
 ---
-title: 'Programs'
-description: 'A program defines the rewards that users receive for inviting others and being invited.'
+title: "Programs"
+description: "A program defines the rewards that users receive for inviting others and being invited."
 ---
 
 ![Programs](/images/programs-list.png)
@@ -16,13 +16,13 @@ Name and optional description that are meant for internal use.
 ### Rewards
 
 Rewards are essential part of any referral program and represent a level of access, feature, or content that a user is "rewarded" with.
-Learn more about [Rewards](/referral/rewards).
+Learn more about [Rewards](/rewards/introduction).
 
 #### Referring vs Invited users
 
 Referring users are those who invite others to your app. They initiate the referral by sharing their unique referral code.
 
-Invited users are new users to your app who are referred by the referring users. 
+Invited users are new users to your app who are referred by the referring users.
 
 This dual-reward system creates a mutually beneficial environment, encouraging both parties to participate actively in the referral.
 
@@ -49,7 +49,9 @@ For **the invited users**, activate the reward when converted to premium.
 Note there is no number selection for Activation - invited users have no further relations.
 
 <Warning>
-Using **Conversion** type for activating rewards requires continious updates to the `is_premium` property for users. Read more about [Users](/referral/users).
+  Using **Conversion** type for activating rewards requires continious updates
+  to the `is_premium` property for users. Read more about
+  [Users](/referral/users).
 </Warning>
 
 #### Deactivation
@@ -65,7 +67,8 @@ Once the reward is activated, the user will retain it indefinitely.
 Once the reward is activated, the user retains it for a specified duration.
 
 <Info>
-Check out how "Free Month" reward is configured in the [Example Program](/referral/programs#3-rewards-for-the-invited-user) below.
+  Check out how "Free Month" reward is configured in the [Example
+  Program](/referral/programs#3-rewards-for-the-invited-user) below.
 </Info>
 
 ### Configs
@@ -80,12 +83,12 @@ If you require a different limit than what is currently offered, [please contact
 
 #### Metadata
 
-This allows you to provide extra configuration and metadata making it flexible to meet your specific needs. 
+This allows you to provide extra configuration and metadata making it flexible to meet your specific needs.
 Must be a valid JSON object.
 
 ## Activation
 
-An active program means that any app users created through an integration will be assigned to that program. 
+An active program means that any app users created through an integration will be assigned to that program.
 Once a user is assigned to the program, they receive a unique referral code that can be shared with and claimed by other users of your app.
 
 By default every new program is Inactive.
@@ -97,37 +100,41 @@ Click the three-dots icon on the right side of a row and click "Activate":
 ![Activate Program](/images/activate-program.png)
 
 <Warning>
-Currently WinWinKit supports **only one active program at a time**. 
-We're working towards allowing multiple active programs with split distribution and targeting.
+  Currently WinWinKit supports **only one active program at a time**. We're
+  working towards allowing multiple active programs with split distribution and
+  targeting.
 </Warning>
 
 ## Re-assignment
 
 Currently it is not possible to explicitly re-assign a user to a different program.
 
-If a program is deleted, then users who have been assigned to that program will be assigned to the active program. 
-If there is no active program, users won't have any program. 
+If a program is deleted, then users who have been assigned to that program will be assigned to the active program.
+If there is no active program, users won't have any program.
 It is also technically possible to have users with referral code but not a program.
 
 <Info>
-Referral code can be assigned to a user only once.
-While it is technically possible for the user to be assigned to different programs, their referral code won't change.
+  Referral code can be assigned to a user only once. While it is technically
+  possible for the user to be assigned to different programs, their referral
+  code won't change.
 </Info>
 
 <Warning>
-Activate and delete programs with caution to prevent unexpected issues. In production, it is good practice to always have an active program.
+  Activate and delete programs with caution to prevent unexpected issues. In
+  production, it is good practice to always have an active program.
 </Warning>
 
 ## Example Program
 
-Let's create a program that rewards users for inviting others. 
+Let's create a program that rewards users for inviting others.
 As an example, we'll set up a program where:
 
 - Referring user gets a new app icon for each person they invite, with three icons to be rewarded in total.
 - Every invited user receives a free month.
 
 <Info>
-Following example assumes there are appropriate rewards configured. Learn more about [Rewards](/referral/rewards).
+  Following example assumes there are appropriate rewards configured. Learn more
+  about [Rewards](/rewards/introduction).
 </Info>
 
 This creates a win-win situation where both parties benefit from the referral.
@@ -140,14 +147,14 @@ Enter a name and optional description.
 
 ![Create program](/images/create-program-1.png)
 
-#### 2. Rewards for the referring user 
+#### 2. Rewards for the referring user
 
 Since we have three app icons to reward the referring user, we need to add three separate rewards.
 
-**2.1.** Click "+ Add Reward" in the "Referring user" section. 
-   
+**2.1.** Click "+ Add Reward" in the "Referring user" section.
+
 The dropdown will show all available rewards.
-   
+
 ![Create program](/images/create-program-2.png)
 
 **2.2** Select the first reward for the referring user. Let it be "App Icon Candy".
@@ -186,13 +193,13 @@ The reward is now selected and has the default configurations:
 
 ![Create program](/images/create-program-7.png)
 
-Now we should change the Deactivation to "Interval" with "1 Months" duration. 
+Now we should change the Deactivation to "Interval" with "1 Months" duration.
 This will ensure that the invited user won't keep the reward after 1 month from when the reward was activation.
 
 ![Create program](/images/create-program-8.png)
 
-Below is screenshot of how all rewards set up: 
-   
+Below is screenshot of how all rewards set up:
+
 ![Create program](/images/create-program-9.png)
 
 #### 4. Save

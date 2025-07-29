@@ -1,0 +1,60 @@
+---
+title: "Credit Reward"
+sidebarTitle: "Credit"
+description: "Virtual currency reward."
+---
+
+import RewardNameAndDescription from "/snippets/reward-name-and-description.mdx";
+import RewardKey from "/snippets/reward-key.mdx";
+import RewardMetadata from "/snippets/reward-metadata.mdx";
+
+## Examples
+
+There are many ways how the credit reward type can be utilized.
+Below are a few of them:
+
+- **Trial Days**: Grant a user with a number of trial days. One day equals one credit.
+- **AI Requests**: Grant additional requests as a reward. One request equals one credit.
+- **Game Levels**: Unlock a number of levels in a game. One level equals one credit.
+
+## Withdrawing
+
+As a user utilizes the credits, you need to withdraw them.
+
+In your integration use a method from our SDK or call the REST API endpoint to withdraw credits.
+
+## Guides
+
+### Creating a reward
+
+Let's create a reward that rewards users with 20 extra AI requests.
+
+#### 1. Type
+
+Select type "Credit"".
+
+![Reward Type](/images/create-credit-reward-1.png)
+
+#### 2. Name and Description
+
+<RewardNameAndDescription />
+
+![Reward General](/images/create-credit-reward-2.png)
+
+#### 3. Key
+
+<RewardKey />
+
+#### 4. Credits
+
+Enter the number of credits attached to the reward. Once the reward is saved, its credits value cannot be changed.
+
+<Info>
+  Credits are accumulative and can be granted multiple times to the same user.
+</Info>
+
+![Reward Credits](/images/create-credit-reward-3.png)
+
+#### 5. Metadata
+
+<RewardMetadata />
