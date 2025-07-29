@@ -1,15 +1,15 @@
 ---
 title: "Code Link"
-description: "A web url to the referral code and its rewards which your app users can share to invite new users."
+description: "A web url to a code and summary of its rewards. The code is either an affiliate, referral or promo code."
 ---
 
 ## Format
 
-A preview link has the following format: `https://<subdomain>.wwk.link/<code>`.
+A code link has the following format: `https://<subdomain>.wwk.link/<code>`.
 
 ## Example
 
-An example of the Preview Link page for the [Usage](https://usage.pro) app, available at [https://usage.wwk.link/NMB231](https://usage.wwk.link/NMB231).
+An example of the Code Link page for the [Usage](https://usage.pro) app, available at [https://usage.wwk.link/NMB231](https://usage.wwk.link/NMB231).
 
 **Simple**
 
@@ -21,13 +21,13 @@ An example of the Preview Link page for the [Usage](https://usage.pro) app, avai
 
 ## Setting Up
 
-To configure the Preview Link feature, go to its tab on the sidebar.
+To configure the Code Link feature, go to its tab on the sidebar.
 
 ![Preview Link Sidebar](/images/preview-link-1.png)
 
 ### Subdomain
 
-Subdomain is required to enable the Preview Link feature.
+Subdomain is required to enable the Code Link feature.
 
 ![Preview Link Subdomain](/images/preview-link-2.png)
 
@@ -51,14 +51,14 @@ Set the link to where your app is available. This can be a link to the App Store
 
 ### Deep Links
 
-Deep links are used to open the app directly from the Preview Link page.
+Deep links are used to open the app directly from the Code Link page.
 
 Configure a deep link for each platform where your app is available, or set a single deep link that works across all platforms.
 
 <Tip>
-  Enter `$code` as part of your deep link url to receive a referral code value.
-  For example, `myapp://open/referral?code=$code` will result in
-  `myapp://open/referral?code=XYZ123`, when the referral code is `XYZ123`.
+  Enter `$code` as part of your deep link url to receive a code value. For
+  example, `myapp://claim-code?code=$code` will result in
+  `myapp://claim-code?code=XYZ123`, when the code is `XYZ123`.
 </Tip>
 
 <Info>
@@ -71,12 +71,12 @@ Configure a deep link for each platform where your app is available, or set a si
 
 ### Swift SDK
 
-The Preview Link value is available on the User object as the `previewLink` property.
+The Code Link value is available on the User object as the `referralCodeLink` property.
 
 Get it from the singleton instance:
 
 ```swift
-let previewLink = Referrals.shared.user?.previewLink
+let referralCodeLink = Referrals.shared.user?.referralCodeLink
 ```
 
 Or in a SwiftUI view from the observable object:
@@ -86,31 +86,31 @@ Or in a SwiftUI view from the observable object:
 
 ...
 
-Text(self.referralsObservableObject.user?.previewLink ?? "-")
+Text(self.referralsObservableObject.user?.referralCodeLink ?? "-")
 ```
 
 Learn more about [Swift SDK](/integrations/swift-sdk).
 
 ### TypeScript SDK
 
-The Preview Link value is available on the user object as the `preview_link` property.
+The Code Link value is available on the user object as the `referral_code_link` property.
 
 ```typescript
 const user = await winwinkit.fetchUser({ appUserId: "<app-user-id>" });
-const previewLink = user?.preview_link;
+const referralCodeLink = user?.referral_code_link;
 ```
 
 ### REST API
 
-The Preview Link value is part of the User object:
+The Code Link value is part of the User object:
 
 ```json
 {
   "data": {
     "user": {
       "app_user_id": "821fae4b5-1a2d-4c1e-9152-5297086a161c",
-      "code": "XYZ123",
-      "preview_link": "https://example.wwk.link/XYZ123",
+      "referral_code": "XYZ123",
+      "referral_code_link": "https://example.wwk.link/XYZ123",
       ...
     }
   }
