@@ -57,7 +57,8 @@
               {
                 "group": "Pages",
                 "pages": [
-                  "pages/code-link"
+                  "pages/code-link",
+                  "pages/affiliate-form"
                 ]
               }
             ]
