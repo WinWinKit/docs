@@ -25,7 +25,7 @@ Normally it is a universally unique identifier (UUID).
 
 Flag determining premium status of a user.
 
-Used with the [Activation on Conversion](/referral/programs#activation) configuration and for tracking referring user's [Stats](/referral/users#stats).
+Used with the [Activation on Conversion](/referrals/referrals#activation) configuration and for tracking referring user's [Stats](/users/users#stats).
 
 We recommend updating it whenever user's premium status changes.
 
@@ -35,7 +35,7 @@ We recommend updating it whenever user's premium status changes.
 
 Date when the user was first seen in your app.
 
-Used to determine user's eligibility to claim a referral code. Learn more about [Claim Code Elibigility](/referral/users#claim-code-eligibility)
+Used to determine user's eligibility to claim a referral code. Learn more about [Claim Code Elibigility](/users/users#claim-code-eligibility)
 
 #### Last Seen At
 
@@ -54,7 +54,7 @@ Must be a valid JSON object.
 
 These are the properties provided by WinWinKit that reflect user's referral data, active and expired rewards, and stats.
 
-#### Code
+#### Referral Code
 
 Unique referral code for the user.
 
@@ -66,13 +66,18 @@ A referral code is always 6 characters long and consists of a combination of let
 
 Example: **XYZ123**
 
-#### Preview Link
+#### Referral Code Link
 
 A web url to the referral code and its rewards which your app users can share with friends.
 
-Learn more about how to set up [Preview Link](/referral/preview-link).
+Learn more about how to set up [Code Link](/pages/code-link).
 
 **Example**: `https://appname.wwk.link/XYZ123`
+
+#### Referral Program
+
+An object containing complete information about the referral program assigned to the user.
+Can be used to create dynamic user interface based on the program configurations.
 
 #### Claim Code Eligibility
 
@@ -88,7 +93,7 @@ Currently, WinWinKit implements a few simple rules for limiting the types of use
 
   Because referral is for inviting new users, this restricts users from getting rewards without referring new users.
 
-  The reference date used is the [First Seen At](/referral/users#first-seen-at), if provided; otherwise, the date when the user was created in WinWinKit is used.
+  The reference date used is the [First Seen At](/users/users#first-seen-at), if provided; otherwise, the date when the user was created in WinWinKit is used.
 
   {" "}
 
@@ -99,7 +104,7 @@ Currently, WinWinKit implements a few simple rules for limiting the types of use
 - The program limit has not been reached.
 
   The reference program here is referring user's program.
-  Read more about Programs [Limit](/referral/programs/) configuration.
+  Read more about Programs [Limit](/referrals/referrals/) configuration.
 
   {" "}
 
@@ -146,7 +151,7 @@ Provides three values:
 
 <Info>
   Correct tracking of Conversions and Churns requires updating [Is
-  Premium](/referral/users#is-premium) flag.
+  Premium](/users/users#is-premium) flag.
 </Info>
 
 **Example**
@@ -230,11 +235,6 @@ A list of active and expired rewards for the user.
 }
 ```
 
-#### Program
-
-An object containing complete information about the referral program assigned to the user.
-Can be used to create dynamic user interface based on the program configurations.
-
 ## Example
 
 Below is an example of a full referral user object returned by the [API](/api-reference/introduction).
@@ -244,8 +244,8 @@ Below is an example of a full referral user object returned by the [API](/api-re
   "data": {
     "user": {
       "app_user_id": "821fae4b5-1a2d-4c1e-9152-5297086a161c",
-      "code": "XYZ123",
-      "preview_link": "https://appname.wwk.link/XYZ123",
+      "referral_code": "XYZ123",
+      "referral_code_link": "https://appname.wwk.link/XYZ123",
       "is_premium": false,
       "first_seen_at": "2024-11-10T10:28:18.104Z",
       "last_seen_at": "2024-11-10T10:28:18.104Z",
@@ -365,7 +365,7 @@ Below is an example of a full referral user object returned by the [API](/api-re
           ]
         }
       },
-      "program": {
+      "referral_program": {
         "id": "123e4567-e89b-12d3-a456-426614174000",
         "name": "Referral Program #1",
         "description": "This is a referral program",
