@@ -38,6 +38,9 @@
           {
             "group": "Features",
             "pages": [
+              "affiliates/affiliates",
+              "referrals/referrals",
+              "promos/promos",
               {
                 "group": "Rewards",
                 "pages": [
@@ -49,9 +52,6 @@
                   "rewards/revenuecat-offering"
                 ]
               },
-              "referrals/referrals",
-              "affiliates/affiliates",
-              "promos/promos",
               "users/users",
               {
                 "group": "Pages",
