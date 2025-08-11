@@ -4,3 +4,88 @@ description: "Invite affiliates to promote your app for a commission."
 ---
 
 ![Affiliates](/images/affiliates-table.png)
+
+## Creating a Campaign
+
+<Warning>
+  Integration with [RevenueCat](https://revenuecat.com) is required to use the
+  feature. That is necessary to track revenue per each user arriving via the
+  affiliate campaign. Follow instructions on the dashboard to set it up.
+</Warning>
+
+<Warning>
+  Valid payment method is required to get started with the feature. It is to
+  ensure that affiliates are paid for their promotion. Follow instructions on
+  the dashboard to set it up.
+</Warning>
+
+### General
+
+#### Code
+
+Each affiliate campaign has its unique code by which users claim attached rewards and are linked to a specific campaign.
+
+Assign a custom value or generate a random one.
+
+### Affiliate Rewards
+
+Affiliates promote your app for a specified commission over a given period of time.
+
+#### Commission Rate
+
+Set the commission rate for the affiliate.
+
+The commission rate is a percentage of the proceeds - revenue after store tax.
+
+Initial and recurring rewards are counted towards the commission.
+
+#### Duration
+
+Set the duration of the affiliate campaign in months.
+
+The duration is counted from the first time the affiliate code is claimed by a user.
+
+### User Rewards
+
+To improve conversion of signups configure rewards for the user who arrives via the affiliate campaign.
+
+![Affiliates Create](/images/affiliates-create.png)
+
+## States
+
+During the life cycle of the campaign, the state of the campaign can be changed.
+
+![Affiliates States](/images/affiliates-states.png)
+
+### Active
+
+The campaign is active and users can claim rewards. Tracked revenue is counted towards the commission for the affiliate.
+
+### Pending
+
+The campaign is pending and an affiliate should accept the campaign to activate it.
+
+### Requests
+
+The incoming requests from affiliates signing up via the [Affiliate Form](/features/pages/affiliate-form) are displayed here.
+You need to accept or reject the request.
+
+### Archived
+
+The campaign is archived after the duration of the active campaign has passed the due date.
+User can still claim rewards for the campaign, but the tracked revenue is not counted towards the commission for the affiliate.
+
+## Preview
+
+Press a campaign row in the table to open the preview page.
+Complete information about the affiliate, rewards, and analytics are displayed there.
+
+![Affiliates Active Preview](/images/affiliates-active-preview.png)
+
+## Affiliate Dashboard
+
+Each affiliate has access to their own dashboard where they can see the details of their campaigns and earnings.
+
+### Payouts
+
+WinWinKit is responsible for tracking the revenue and paying out the commissions to the affiliates.
