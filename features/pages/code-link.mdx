@@ -1,6 +1,6 @@
 ---
 title: "Code Link"
-description: "A web url to a code and summary of its rewards. The code is either an affiliate, referral or promo code."
+description: "A web URL to a code, its rewards, and instructions on how to use it. The code can be an affiliate, referral, or promo code."
 ---
 
 ## Format
@@ -11,65 +11,77 @@ A code link has the following format: `https://<subdomain>.wwk.link/<code>`.
 
 An example of the Code Link page for the [Usage](https://usage.pro) app, available at [https://usage.wwk.link/NMB231](https://usage.wwk.link/NMB231).
 
-**Simple**
-
-![Usage](/images/preview-link-usage-1.png)
-
-**With Deep Links**
-
-![Usage](/images/preview-link-usage-2.png)
+![Code Link Usage](/images/code-link-usage.png)
 
 ## Setting Up
 
-To configure the Code Link feature, go to its tab on the sidebar.
+### Project Details
 
-![Preview Link Sidebar](/images/preview-link-1.png)
+For the best presentation of the project on the Code Link page, configure the following details by going to Settings -> General.
 
-### Subdomain
-
-Subdomain is required to enable the Code Link feature.
-
-![Preview Link Subdomain](/images/preview-link-2.png)
-
-<Warning>**Subdomain can be set only once.**</Warning>
-
-### Logo
+#### Logo
 
 Upload app icon.
 
-### Name
+#### Name
 
-Name of the app.
+In necessary update the name of the project to match the app name.
 
-### Description
+#### Description
 
-Short description of the app.
+Enter a short description of the app.
 
-### Link
+#### Link
 
-Set the link to where your app is available. This can be a link to the App Store or website. See [Deep Links](#deep-links) for more configuration options.
+Set the link to where your app is available. This can be a link to the App Store or website.
+
+![Code Link Project Details](/images/code-link-project-details.png)
+
+### Subdomain
+
+Subdomain is required to enable the Code Link feature and can be set by going to Settings -> General -> Subdomain.
+
+<Warning>**Subdomain can be set only once.**</Warning>
+
+![Code Link Subdomain](/images/code-link-subdomain.png)
 
 ### Deep Links
 
-Deep links are used to open the app directly from the Code Link page.
+Deep links can be used to open the app directly from the Code Link page and enable two-step instructions shown on the page.
+
+#### Configuring
+
+Navigate to Pages -> Code Link -> Deep Links to configure the deep links.
 
 Configure a deep link for each platform where your app is available, or set a single deep link that works across all platforms.
 
-<Tip>
-  Enter `$code` as part of your deep link url to receive a code value. For
-  example, `myapp://claim-code?code=$code` will result in
-  `myapp://claim-code?code=XYZ123`, when the code is `XYZ123`.
-</Tip>
-
-<Info>
+<Warning>
   You are responsible for setting up the deep links handling in your app. When
-  receiving a deep link, you can present a view, claim the received referral
-  code, or implement any other functionality that suits your app's needs.
-</Info>
+  receiving a deep link, you can present a view, claim the received code, or
+  implement any other functionality that suits your needs.
+</Warning>
+
+![Code Link Deep Links](/images/code-link-deep-links.png)
+
+## Preview
+
+Navigate to Pages -> Code Link to preview and verify the presentation of the page.
+
+Use **Preview Configurations** to verify how the page is presented with different content and deep links.
+
+![Code Link Preview](/images/code-link-preview.png)
 
 ## Access
 
-### Swift SDK
+### Affiliate Code
+
+The affiliate code link is available on the dashboard for active and archived campaigns.
+
+### Referral Code
+
+The referral code link value is available on the user object via SDKs and REST API.
+
+#### Swift SDK
 
 The Code Link value is available on the User object as the `referralCodeLink` property.
 
@@ -91,7 +103,7 @@ Text(self.referralsObservableObject.user?.referralCodeLink ?? "-")
 
 Learn more about [Swift SDK](/integrations/swift-sdk).
 
-### TypeScript SDK
+#### TypeScript SDK
 
 The Code Link value is available on the user object as the `referral_code_link` property.
 
@@ -100,7 +112,7 @@ const user = await winwinkit.fetchUser({ appUserId: "<app-user-id>" });
 const referralCodeLink = user?.referral_code_link;
 ```
 
-### REST API
+#### REST API
 
 The Code Link value is part of the User object:
 
@@ -116,3 +128,7 @@ The Code Link value is part of the User object:
   }
 }
 ```
+
+### Promo Code
+
+The promo code link can be constructed by following the usual format `https://<subdomain>.wwk.link/<promo-code>`.
