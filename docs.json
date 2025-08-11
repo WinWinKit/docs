@@ -31,41 +31,34 @@
           {
             "group": "General",
             "pages": [
-              "introduction",
-              "glossary"
+              "general/introduction"
             ]
           },
           {
             "group": "Features",
             "pages": [
-              "affiliates/affiliates",
-              "referrals/referrals",
-              "promos/promos",
+              "features/affiliates",
+              "features/referrals",
+              "features/promos",
               {
                 "group": "Rewards",
                 "pages": [
-                  "rewards/introduction",
-                  "rewards/basic",
-                  "rewards/credit",
-                  "rewards/offer-code",
-                  "rewards/revenuecat-entitlement",
-                  "rewards/revenuecat-offering"
+                  "features/rewards/introduction",
+                  "features/rewards/basic",
+                  "features/rewards/credit",
+                  "features/rewards/offer-code",
+                  "features/rewards/revenuecat-entitlement",
+                  "features/rewards/revenuecat-offering"
                 ]
               },
-              "users/users",
+              "features/users",
               {
                 "group": "Pages",
                 "pages": [
-                  "pages/code-link",
-                  "pages/affiliate-form"
+                  "features/pages/code-link",
+                  "features/pages/affiliate-form"
                 ]
               }
-            ]
-          },
-          {
-            "group": "Guides",
-            "pages": [
-              "guides/creating-referral-program"
             ]
           },
           {
@@ -75,6 +68,12 @@
               "integrations/swift-sdk",
               "integrations/dart-sdk",
               "integrations/typescript-sdk"
+            ]
+          },
+          {
+            "group": "Misc",
+            "pages": [
+              "misc/glossary"
             ]
           }
         ]
