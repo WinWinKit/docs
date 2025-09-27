@@ -30,9 +30,7 @@
         "groups": [
           {
             "group": "General",
-            "pages": [
-              "general/introduction"
-            ]
+            "pages": ["general/introduction"]
           },
           {
             "group": "Features",
@@ -72,16 +70,14 @@
           },
           {
             "group": "Misc",
-            "pages": [
-              "misc/glossary"
-            ]
+            "pages": ["misc/glossary"]
           }
         ]
       },
       {
         "tab": "API Reference",
         "openapi": {
-          "source": "api-reference/openapi.yaml",
+          "source": "https://api.winwinkit.com/openapi-yaml",
           "directory": "api-reference"
         },
         "groups": [
@@ -100,9 +96,7 @@
         "groups": [
           {
             "group": "Changelog",
-            "pages": [
-              "changelog/product-updates"
-            ]
+            "pages": ["changelog/product-updates"]
           }
         ]
       },
@@ -111,9 +105,7 @@
         "groups": [
           {
             "group": "Support",
-            "pages": [
-              "support/contact-us"
-            ]
+            "pages": ["support/contact-us"]
           }
         ]
       }
