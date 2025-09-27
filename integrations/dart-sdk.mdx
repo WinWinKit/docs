@@ -6,71 +6,144 @@ description: "SDK for Dart and Flutter."
 import SDKNoUIWarning from "/snippets/sdk-no-ui-warning.mdx";
 import UserIsPremiumRevenueCat from "/snippets/user-is-premium-revenue-cat.mdx";
 
-### Requirements
-
-The WinWinKit SDK is available in Dart 2.12.0 or later and can be used in your Flutter app.
-
 ### Installation
 
-Add the following dependency to your pubspec.yaml
+Add the dependency from the GitHub repository and pin it to the latest release tag:
 
 ```yaml
 dependencies:
   WinWinKit:
-    git: https://github.com/winwinkit/winwinkit-dart.git
+    git:
+      url: https://github.com/WinWinKit/winwinkit-dart.git
+      ref: 0.3.0
 ```
 
-### Example
+Then run `flutter pub get` (or `dart pub get` for pure Dart projects).
+
+### Initialize the client
 
 ```dart
-import "package:WinWinKit/api.dart";
+import 'package:WinWinKit/api.dart';
 
-// Create or update user.
-final userApi = UsersApi();
-final userRequest = UserCreateRequest(
-  appUserId: 'your-app-user-id',
-);
+final sdk = WinWinKit();
+final usersApi = sdk.getUsersApi();
+```
 
-try {
-    final user = await userApi.createOrUpdateUser('your-api-key', userRequest);
-    print(user);
-}
-catch (e) {
-    print('Exception when calling UsersApi->createOrUpdateUser: $e\n');
-}
+`WinWinKit` builds on `dio` and exposes the underlying client as `sdk.dio`. You can provide your own `Dio` instance, override the API base URL (for staging environments), or add interceptors such as request logging.
 
-...
+### Using the APIs
 
-// Claim code.
-final claimActionsApi = ClaimActionsApi();
-final claimRequest = UserClaimCodeRequest(
-  code: 'code-to-claim',
-);
+All methods return a `Future<Response<T>>`. The deserialized model lives under `response.data`.
+Each snippet instantiates a new client for clarity—reuse a single `WinWinKit` instance in your app to share `Dio` configuration.
 
-try {
-    final response = await claimActionsApi.claimCode('your-app-user-id', 'your-api-key', claimRequest);
-    print(response);
-}
-catch (e) {
-    print('Exception when calling ClaimActionsApi->claimCode: $e\n');
-}
+#### Create or update a user
 
-...
+```dart
+import 'package:WinWinKit/api.dart';
+import 'package:built_value/json_object.dart';
+import 'package:dio/dio.dart';
 
-// Fetch offer code
-final offerCodeApi = AppStoreApi();
+Future<void> syncUser() async {
+  final sdk = WinWinKit();
+  final usersApi = sdk.getUsersApi();
 
-try {
-    final result = offerCodeApi.getOfferCode('your-offer-code-id', 'your-api-key');
-    print(result);
-} catch (e) {
-    print('Exception when calling AppStoreApi->getOfferCode: $e\n');
+  final request = UserCreateRequest((b) => b
+    ..appUserId = 'your-app-user-id'
+    ..isPremium = false
+    ..metadata = JsonObject({'plan': 'starter'}));
+
+  try {
+    final response = await usersApi.createOrUpdateUser(
+      xApiKey: 'your-api-key',
+      userCreateRequest: request,
+    );
+
+    final createdUser = response.data?.data?.user;
+    print('Synced user: ${createdUser?.appUserId}');
+  } on DioException catch (error) {
+    print('Failed to sync user: ${error.response?.data}');
+  }
 }
 ```
 
-## Requirements
+<UserIsPremiumRevenueCat />
 
-- Dart 2.12.0+
+#### Retrieve a user
+
+```dart
+final sdk = WinWinKit();
+final usersApi = sdk.getUsersApi();
+
+final userResponse = await usersApi.getUser(
+  appUserId: 'your-app-user-id',
+  xApiKey: 'your-api-key',
+);
+
+final user = userResponse.data?.data?.user;
+print('Fetched user: ${user?.appUserId}');
+```
+
+#### Claim a referral, promo, or affiliate code
+
+```dart
+final sdk = WinWinKit();
+final claimActionsApi = sdk.getClaimActionsApi();
+
+final claimResponse = await claimActionsApi.claimCode(
+  appUserId: 'your-app-user-id',
+  xApiKey: 'your-api-key',
+  userClaimCodeRequest: UserClaimCodeRequest((b) => b..code = 'XYZ123'),
+);
+
+final updatedUser = claimResponse.data?.data?.user;
+print('Updated user after claim: ${updatedUser?.appUserId}');
+```
+
+`claimResponse.data?.data?.rewardsGranted` contains the rewards granted to the user, grouped by reward type.
+
+#### Withdraw credits for a user
+
+```dart
+final sdk = WinWinKit();
+final rewardsApi = sdk.getRewardsActionsApi();
+
+await rewardsApi.withdrawCredits(
+  appUserId: 'your-app-user-id',
+  xApiKey: 'your-api-key',
+  userWithdrawCreditsRequest: UserWithdrawCreditsRequest((b) => b
+    ..key = 'credit_reward_key'
+    ..amount = 100),
+);
+```
+
+#### Fetch an App Store Offer Code
+
+```dart
+final sdk = WinWinKit();
+final appStoreApi = sdk.getAppStoreApi();
+
+final offerCode = await appStoreApi.getOfferCode(
+  offerCodeId: 'your-offer-code-id',
+  xApiKey: 'your-api-key',
+);
+
+final offer = offerCode.data?.data?.offerCode;
+print('Offer code name: ${offer?.name}');
+```
+
+### Error handling
+
+`dio` throws a `DioException` when the request fails or the response cannot be deserialized. Inspect `error.response?.statusCode` and `error.response?.data` for details returned by WinWinKit.
+
+### User Interface
+
+<SDKNoUIWarning />
+
+### Requirements
+
+- Dart 2.18.0+
+- Flutter 3.3 or newer
+- `dio` 5.7.x (pulled in automatically)
 
 ---
 
