@@ -92,15 +92,6 @@
         ]
       },
       {
-        "tab": "Changelog",
-        "groups": [
-          {
-            "group": "Changelog",
-            "pages": ["changelog/product-updates"]
-          }
-        ]
-      },
-      {
         "tab": "Support",
         "groups": [
           {
@@ -140,5 +131,11 @@
       "x-twitter": "https://x.com/winwin_kit",
       "github": "https://github.com/winwinkit"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/changelog/product-updates",
+      "destination": "https://winwinkit.com/changelog"
+    }
+  ]
 }
