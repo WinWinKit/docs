@@ -14,28 +14,28 @@ pnpm add @winwinkit/sdk
 ### Example
 
 ```typescript
-import { WinWinKit } from 'winwinkit'
+import { WinWinKit } from "@winwinkit/sdk";
 
 const wwk = new WinWinKit({
-  apiKey: process.env['WINWINKIT_API_KEY'] ?? '',
+  apiKey: process.env['WINWINKIT_API_KEY']!,
 })
 
 // Create or update user.
-const user = await wwk.createOrUpdateUser({
+const { user, errors } = await wwk.createOrUpdateUser({
   appUserId: "821fae4b5-1a2d-4c1e-9152-5297086a161c"
 })
 
 ...
 
 // Fetch user
-const user = await wwk.fetchUser({
+const { user, errors } = await wwk.fetchUser({
   appUserId: "821fae4b5-1a2d-4c1e-9152-5297086a161c"
 })
 
 ...
 
 // Claim code
-const { user, rewardsGranted } = await wwk.claimCode({
+const { user, rewardsGranted, errors } = await wwk.claimCode({
   appUserId: "821fae4b5-1a2d-4c1e-9152-5297086a161c",
   code: "XYZ123"
 })
@@ -43,7 +43,7 @@ const { user, rewardsGranted } = await wwk.claimCode({
 ...
 
 // Withdraw credits
-const { user, withdrawResult } = await wwk.withdrawCredits({
+const { user, withdrawResult, errors } = await wwk.withdrawCredits({
   appUserId: "821fae4b5-1a2d-4c1e-9152-5297086a161c",
   key: "key",
   amount: 10
@@ -52,7 +52,7 @@ const { user, withdrawResult } = await wwk.withdrawCredits({
 ...
 
 // Fetch offer code
-const { offerCode, subscription } = await wwk.fetchOfferCode({
+const { offerCode, subscription, errors } = await wwk.fetchOfferCode({
   offerCodeId: "123e4567-e89b-12d3-a456-426614174000",
 })
 ```
