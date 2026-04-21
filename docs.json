@@ -24,85 +24,55 @@
   },
   "favicon": "/favicon.ico",
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "General",
-            "pages": ["general/introduction"]
-          },
-          {
-            "group": "Features",
-            "pages": [
-              "features/affiliates",
-              "features/referrals",
-              "features/promos",
-              {
-                "group": "Rewards",
-                "pages": [
-                  "features/rewards/introduction",
-                  "features/rewards/basic",
-                  "features/rewards/credit",
-                  "features/rewards/offer-code",
-                  "features/rewards/revenuecat-entitlement",
-                  "features/rewards/revenuecat-offering"
-                ]
-              },
-              "features/users",
-              {
-                "group": "Pages",
-                "pages": [
-                  "features/pages/code-link",
-                  "features/pages/affiliate-form"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/api-keys",
-              "integrations/swift-sdk",
-              "integrations/dart-sdk",
-              "integrations/typescript-sdk"
-            ]
-          },
-          {
-            "group": "Misc",
-            "pages": ["misc/glossary"]
-          }
+        "group": "Intro",
+        "pages": [
+          "api-reference/introduction",
+          "api-reference/authentication",
+          "api-reference/errors"
         ]
       },
       {
-        "tab": "API Reference",
-        "openapi": {
-          "source": "https://api.winwinkit.com/openapi-yaml",
-          "directory": "api-reference"
-        },
-        "groups": [
+        "group": "Client API",
+        "pages": [
           {
-            "group": "API Documentation",
+            "group": "Users",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/authentication",
-              "api-reference/errors"
+              "api-reference/users/create-or-update-user",
+              "api-reference/users/get-user"
+            ]
+          },
+          {
+            "group": "Claim Code",
+            "pages": ["api-reference/claim-actions/claim-code"]
+          },
+          {
+            "group": "User Rewards",
+            "pages": ["api-reference/rewards-actions/withdraw-credits"]
+          },
+          {
+            "group": "Transactions",
+            "pages": [
+              "api-reference/transactions/app-store",
+              "api-reference/transactions/google-play"
             ]
           }
         ]
       },
       {
-        "tab": "Support",
-        "groups": [
+        "group": "Platform API",
+        "pages": [
           {
-            "group": "Support",
-            "pages": ["support/contact-us"]
+            "group": "User Rewards",
+            "pages": ["api-reference/rewards-actions/grant-a-reward"]
           }
         ]
       }
     ]
   },
   "api": {
+    "openapi": "https://api.winwinkit.com/openapi-yaml",
     "playground": {
       "display": "interactive"
     },
