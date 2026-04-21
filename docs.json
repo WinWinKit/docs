@@ -26,14 +26,6 @@
   "navigation": {
     "groups": [
       {
-        "group": "Intro",
-        "pages": [
-          "api-reference/introduction",
-          "api-reference/authentication",
-          "api-reference/errors"
-        ]
-      },
-      {
         "group": "Client API",
         "pages": [
           {
