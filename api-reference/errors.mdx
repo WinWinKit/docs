@@ -1,17 +1,17 @@
 ---
 title: 'Handling Errors'
-description: 'Learn how the WinWinKit API returns errors and handle them in your code.'
+description: 'Learn how the WinWinKit API returns errors and how to handle them in your code.'
 ---
 
 ## Overview
 
-When you send a request to the WinWinKit API, you receive a response that includes an HTTP status code and, in most cases, a response body. 
-To determine your request’s status and handle errors, use the HTTP status code along with the code from the Error Response. 
+When you send a request to the WinWinKit API, you receive a response that includes an HTTP status code and, in most cases, a response body.
+To determine your request’s status and handle errors, use the HTTP status code along with the code from the Error Response.
 Interpret the error starting with the most general information first.
 
 ## Response HTTP Codes
 
-WinWinKit uses standard HTTP codes to indicate the success or failure of your requests. 
+WinWinKit uses standard HTTP codes to indicate the success or failure of your requests.
 In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related failures, and 5xx codes are for infrastructure issues.
 
 | Status | Name | Description |
@@ -20,6 +20,7 @@ In general, 2xx HTTP codes correspond to success, 4xx codes are for user-related
 | 201 | Created | Object created. |
 | 400 | Bad Request | Check that the request format was correct. |
 | 401 | Unauthorized | The API key used was missing or invalid. |
+| 403 | Forbidden | The operation is not permitted. |
 | 404 | Not Found | The resource was not found. |
 | 422 | Unprocessable Entity | Check that the request data was correct. |
 | 424 | Failed Dependency | Request to the external service (e.g. App Store Connect) has failed. |
@@ -45,19 +46,172 @@ The error details that an API returns in the response body whenever the API requ
 
 ## Error Code
 
-The code property is a stable, machine-readable value indicating the exact type of error. 
-The code is hierarchical, with dots separating the information about the error from general to specific. 
-The more information the system has about the error, the more levels the error code includes. 
+The code property is a stable, machine-readable value indicating the exact type of error.
+The code is hierarchical, with dots separating the information about the error from general to specific.
+The more information the system has about the error, the more levels the error code includes.
 
 | Status | Code | Description |
 |:-------|:-----|:------------|
-| 400 | BAD_REQUEST | The request is not valid. |
 | 400 | BODY_INVALID | The request body is the wrong type and is not valid JSON. |
-| 401 | UNAUTHORIZED | The rate limit was exceeded. |
-| 403 | FORBIDDEN | The method and path combination is valid, but not allowed due to access restrictions. |
-| 404 | NOT_FOUND | The resource does not exist. |
-| 404 | PATH_ERROR | The path is not valid. For example, GET `https://api.winwinkit.com/lol` is not a valid path in this API. |
-| 422 | PARAMETER_ERROR.INVALID | The parameter is allowed but has an invalid value or type. |
-| 422 | PARAMETER_ERROR.REQUIRED | A required parameter is missing. |
+| 401 | UNAUTHORIZED | The operation is not authorized due to missing or invalid API key. |
+| 403 | FORBIDDEN.CODE_INACTIVE | The code cannot be claimed because it is not active. Applies to the affiliate codes when not yet accepted by an affiliate and to the promo codes when inactive. |
+| 403 | FORBIDDEN.CODE_LIMIT_REACHED | The code cannot be claimed because limit has been reached. |
+| 403 | FORBIDDEN.OPERATION_DUPLICATE | The operation is not allowed to be performed again. Applies only to the grant a reward and withdraw credits endpoints when already used `operation_id` value is provided. |
+| 403 | FORBIDDEN.USER_ALREADY_CLAIMED_CODE | The user already claimed a code. |
+| 403 | FORBIDDEN.USER_CANNOT_CLAIM_OWN_CODE | The user cannot claim own referral code. |
+| 403 | FORBIDDEN.<br/>USER_NOT_ELIGIBLE_DUE_TO_TIME_CONSTRAINTS | The user is not eligible to claim a code due to time constraints. By default the user can claim a code within 7 days since the first seen at or creation date. |
+| 404 | NOT_FOUND.CODE | The code does not exist. |
+| 404 | NOT_FOUND.REWARD | The reward does not exist. |
+| 404 | NOT_FOUND.USER | The user does not exist. |
+| 404 | PATH_ERROR | The path is not valid. For example, `GET https://api.winwinkit.com/lol` is not a valid path in this API. |
+| 422 | PARAMETER_ERROR.INVALID | The parameter is allowed but has an invalid value or type.  Name of an invalid parameter is provided in the `source` field of an error object. |
+| 422 | PARAMETER_ERROR.REQUIRED | A required parameter is missing. Name of a missing parameter is provided in the `source` field of an error object. |
 | 429 | TOO_MANY_REQUESTS | Too many requests. |
 | 500 | INTERNAL_SERVER_ERROR | Indicates an error with WinWinKit servers. |
+
+## Error Examples
+
+### Unauthorized
+
+Error returned when missing an API key:
+
+```json
+{
+    "errors": [
+        {
+            "code": "UNAUTHORIZED",
+            "status": 401,
+            "message": "Invalid API Key",
+            "source": null
+        }
+    ]
+}
+```
+
+### Claiming Own Code
+
+Error returned when a user tries to claim their own code:
+
+```json
+{
+    "errors": [
+        {
+            "code": "FORBIDDEN.USER_CANNOT_CLAIM_OWN_CODE",
+            "status": 403,
+            "message": "User Cannot Claim Own Code",
+            "source": null
+        }
+    ]
+}
+```
+
+### Claiming Code Again
+
+Error returned when a user claimed code already and attempts to claim a code again:
+
+```json
+{
+    "errors": [
+        {
+            "code": "FORBIDDEN.USER_ALREADY_CLAIMED_CODE",
+            "status": 403,
+            "message": "User Already Claimed Code",
+            "source": null
+        }
+    ]
+}
+```
+
+### Code Not Found
+
+Error returned when a trying to claim a non-existing code:
+
+```json
+{
+    "errors": [
+        {
+            "code": "NOT_FOUND.CODE",
+            "status": 404,
+            "message": "Code Not Found",
+            "source": null
+        }
+    ]
+}
+```
+
+### User Not Found
+
+Error returned when attempting to perform any operations (e.g. fetch or claim code) on a non-existing user:
+
+```json
+{
+    "errors": [
+        {
+            "code": "NOT_FOUND.USER",
+            "status": 404,
+            "message": "User Not Found",
+            "source": null
+        }
+    ]
+}
+```
+
+### Reward Not Found
+
+Error returned when attempting to withdraw credits on a non-existing reward:
+
+```json
+{
+    "errors": [
+        {
+            "code": "NOT_FOUND.REWARD",
+            "status": 404,
+            "message": "Reward Not Found",
+            "source": null
+        }
+    ]
+}
+```
+
+### Missing Parameter
+
+Error returned when a required parameter named `code` is missing:
+
+```json
+{
+    "errors": [
+        {
+            "code": "PARAMETER_ERROR.REQUIRED",
+            "status": 422,
+            "message": "Required",
+            "source": "code"
+        }
+    ]
+}
+```
+
+<Tip>
+When a required parameter is missing, the error object includes the name of the parameter in the `source` field.
+</Tip>
+
+
+### Invalid Parameter
+
+Error returned when a parameter named `is_trial` is invalid:
+
+```json
+{
+    "errors": [
+        {
+            "code": "PARAMETER_ERROR.INVALID",
+            "status": 422,
+            "message": "Must be a boolean",
+            "source": "is_trial"
+        }
+    ]
+}
+```
+
+<Tip>
+When a parameter is invalid, the error object includes `message` field with a descriptive error message and the name of the parameter in the `source` field.
+</Tip>
