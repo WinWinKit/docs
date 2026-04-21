@@ -44,12 +44,12 @@
             ]
           },
           {
-            "group": "Claim Code",
-            "pages": ["api-reference/claim-actions/claim-code"]
-          },
-          {
             "group": "User Rewards",
             "pages": ["api-reference/rewards-actions/withdraw-credits"]
+          },
+          {
+            "group": "Claim Code",
+            "pages": ["api-reference/claim-actions/claim-code"]
           },
           {
             "group": "Transactions",
