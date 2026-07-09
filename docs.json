@@ -44,6 +44,12 @@
             "pages": ["api-reference/claim-actions/claim-code"]
           },
           {
+            "group": "Codes",
+            "pages": [
+              "api-reference/codes/get-code"
+            ]
+          },
+          {
             "group": "Transactions",
             "pages": [
               "api-reference/transactions/app-store",
