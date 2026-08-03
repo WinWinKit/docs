@@ -62,6 +62,10 @@
         "group": "Platform API",
         "pages": [
           {
+            "group": "Analytics",
+            "pages": ["api-reference/analytics/affiliates"]
+          },
+          {
             "group": "User Rewards",
             "pages": ["api-reference/rewards-actions/grant-a-reward"]
           }
