@@ -62,8 +62,11 @@
         "group": "Platform API",
         "pages": [
           {
-            "group": "Analytics",
-            "pages": ["api-reference/analytics/affiliates"]
+            "group": "Affiliates",
+            "pages": [
+              "api-reference/affiliates/list-affiliates",
+              "api-reference/affiliates/analytics"
+            ]
           },
           {
             "group": "User Rewards",
@@ -105,6 +108,10 @@
     }
   },
   "redirects": [
+    {
+      "source": "/api-reference/analytics/affiliates",
+      "destination": "/api-reference/affiliates/analytics"
+    },
     {
       "source": "/changelog/product-updates",
       "destination": "https://winwinkit.com/changelog"
